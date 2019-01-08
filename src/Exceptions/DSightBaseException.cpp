@@ -1,0 +1,10 @@
+#include "DSightBaseException.hpp"
+
+DSightBaseException::DSightBaseException(const char * message, ExceptionCode code) {
+	this->message = message;
+	this->code = code;
+}
+
+const char* DSightBaseException::what() const noexcept {
+	return this->message;
+}
