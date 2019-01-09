@@ -7,8 +7,8 @@ namespace DSight {
 	template <typename ContextClass>
 	int ContextHandler<ContextClass>::context_count = 0;
 
-	template <typename ContextClass> ContextHandler<ContextClass>::ContextHandler(ContextCode context_code, int maj, int min) {
-		std::cout << "INIT " << ContextHandler::context_count << std::endl;
+	template <typename ContextClass>
+	ContextHandler<ContextClass>::ContextHandler(ContextCode context_code, int maj, int min) {
 		if (ContextHandler::context_count > 0) {
 			throw DSightBaseException("Multiple Context.", DSIGHT_EXCEPTION_MULTIPLE_CONTEXT);
 		}
@@ -17,15 +17,21 @@ namespace DSight {
 			switch (context_code) {
 				#ifdef _USE_GLFW3_
 				case DSIGHT_CONTEXT_GLFW3:
-					//m_wrapper = ContextGLFW3();
+					m_wrapper = new ContextGLFW3();
 					break;
 				#endif
 				default:
-					std::cout << "NEVER\n"; 
 					ContextHandler::context_count = 0;
 					throw DSightBaseException("Unsupported Context", DSIGHT_EXCEPTION_UNSUPPORTED_CONTEXT);
 			}
 		}
-		std::cout << "INIT END " << ContextHandler::context_count << std::endl;
 	}
+	
+	template <typename ContextClass>
+	ContextHandler<ContextClass>::~ContextHandler() {
+		delete m_wrapper;
+	}
+	#ifdef _USE_GLFW3_
+	template class ContextHandler<ContextGLFW3>;
+	#endif
 }

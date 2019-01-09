@@ -8,13 +8,10 @@ namespace DSight {
 	template <typename ContextClass> class ContextHandler {
 		public:
 			ContextHandler(ContextCode context_code, int maj, int min);
+			~ContextHandler();
 
 		protected:
-			ContextClass m_wrapper;
+			ContextClass * m_wrapper;
 			static int context_count;
 	};
-	
-	#ifdef _USE_GLFW3_
-	template class ContextHandler<ContextGLFW3>;
-	#endif
 }

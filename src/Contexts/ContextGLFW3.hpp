@@ -5,6 +5,7 @@ namespace DSight {
 	class ContextGLFW3 {
 		public:
 			ContextGLFW3();
+			~ContextGLFW3();
 			
 		private:
 			std::vector<GLFWwindow*> m_surfaces;
