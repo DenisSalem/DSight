@@ -2,6 +2,12 @@ cmake_minimum_required (VERSION 3.0.2)
 project(DSight)
 enable_testing()
 
+set(USE_GLFW3 "1")
+
+if(USE_GLFW3)
+add_definitions(-D_USE_GLFW3_)
+endif()
+
 add_subdirectory(src/Exceptions)
 add_subdirectory(src/Contexts)
 add_subdirectory(test)

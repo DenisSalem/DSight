@@ -28,12 +28,19 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=1
-FILE_NAME_0=0;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FContexts%2FContextWrapper.cpp;0;4
-FILE_NAME_1=206;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FContexts%2FContextWrapper.hpp;0;4
+current_page=4
+FILE_NAME_0=235;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FExceptions%2FExceptionCodes.hpp;0;4
+FILE_NAME_1=225;CMake;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FContexts%2FCMakeLists.txt;0;4
+FILE_NAME_2=266;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Ftest%2FTestContextHandler.cpp;0;4
+FILE_NAME_3=414;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FContexts%2FContextHandler.hpp;0;4
+FILE_NAME_4=716;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FContexts%2FContextHandler.cpp;0;4
+FILE_NAME_5=128;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FContexts%2FContextCodes.hpp;0;4
+FILE_NAME_6=710;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FContexts%2FContextGLFW3.cpp;0;4
+FILE_NAME_7=109;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FContexts%2FContextGLFW3.hpp;0;4
+FILE_NAME_8=137;CMake;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2FCMakeLists.txt;0;4
 
 [VTE]
-last_dir=/home/anonyme
+last_dir=/home/http/dev/github/build/test
 
 [build-menu]
 C++FT_00_LB=_Compile
