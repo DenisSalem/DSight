@@ -7,6 +7,7 @@ include_directories(
 add_library(
   Context STATIC
   ContextHandler.cpp
+  ContextWrapper.cpp
 )
 
 target_link_libraries(Context DSightBaseException)

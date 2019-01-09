@@ -6,4 +6,4 @@ add_subdirectory(src/Exceptions)
 add_subdirectory(src/Contexts)
 add_subdirectory(test)
 
-add_test(TestContextHandler test/TestContextHandler)
+add_test(ContextHandler test/ContextHandler)

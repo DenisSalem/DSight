@@ -5,9 +5,9 @@ include_directories(
 )
 
 add_executable(
-	TestContextHandler
+	ContextHandler
 	TestContextHandler.cpp
 )
 
-target_link_libraries(TestContextHandler Context)
+target_link_libraries(ContextHandler Context)
 
