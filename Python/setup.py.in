@@ -1,0 +1,15 @@
+#! /usr/bin/python3
+
+from setuptools import setup, Extension
+
+example_module = Extension(
+    'dsight',
+    sources=['${CMAKE_CURRENT_SOURCE_DIR}/context.cpp'],
+    language='C++' )
+
+setup(
+    name='DSight',
+    version='${PACKAGE_VERSION}',
+    description='A Chart library. Low level implementation, High level API',
+    ext_modules=[example_module],
+)

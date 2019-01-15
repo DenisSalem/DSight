@@ -6,10 +6,10 @@
 
 using namespace DSight;
 
-bool SingleContextHandlerInstance() {
+template <typename ContextType> bool SingleContextHandlerInstance() {
 	try {
-		ContextHandler<ContextGLFW3> context(DSIGHT_CONTEXT_GLFW3, 0, 0);
-		ContextHandler<ContextGLFW3> context2(DSIGHT_CONTEXT_GLFW3, 1, 0);
+		ContextHandler<ContextType> context(DSIGHT_CONTEXT_GLFW3, 0, 0);
+		ContextHandler<ContextType> context2(DSIGHT_CONTEXT_GLFW3, 1, 0);
   	}
 	catch (const DSightBaseException& e) {
 		if (e.code == DSIGHT_EXCEPTION_MULTIPLE_CONTEXT) {
@@ -21,6 +21,6 @@ bool SingleContextHandlerInstance() {
 }
 
 int main(int argc, char ** argv) {
-	assert (SingleContextHandlerInstance());
+	assert(SingleContextHandlerInstance<ContextGLFW3>());
 	return 0;
 }

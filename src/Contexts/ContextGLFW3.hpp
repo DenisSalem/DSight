@@ -1,13 +1,16 @@
 #include <GLFW/glfw3.h>
-#include <vector>
+#include "ContextBase.hpp"
 
 namespace DSight {
-	class ContextGLFW3 {
+	class ContextGLFW3 : ContextBase {
 		public:
 			ContextGLFW3();
 			~ContextGLFW3();
-			
-		private:
-			std::vector<GLFWwindow*> m_surfaces;
+			void TestDisplayWindow();
+		
+		protected:
+			int CreateSurface();
+			void DeleteSurface(int index);
+
 	};
 }
