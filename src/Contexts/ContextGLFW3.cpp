@@ -30,6 +30,7 @@ namespace DSight {
 			glfwSwapBuffers(window);
 			glfwPollEvents();
 		}
+		glfwDestroyWindow(window);
 		/*glfwTerminate();*/
 	}
 	
