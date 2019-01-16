@@ -31,7 +31,14 @@ namespace DSight {
 	ContextHandler<ContextClass>::~ContextHandler() {
 		delete m_wrapper;
 	}
+	
+	template <typename ContextClass>
+	void ContextHandler<ContextClass>::TestDisplayWindow() {
+		m_wrapper->TestDisplayWindow();
+	}
+	
 	#ifdef _USE_GLFW3_
+	
 	template class ContextHandler<ContextGLFW3>;
 	#endif
 }

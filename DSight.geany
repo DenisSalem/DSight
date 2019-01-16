@@ -19,7 +19,7 @@ indent_mode=2
 
 [project]
 name=DSight
-base_path=/home/denissalem/hd_storage/works/DSight
+base_path=/home/http/dev/github/DSight
 description=
 file_patterns=
 
@@ -28,19 +28,17 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=7
-FILE_NAME_0=915;C++;0;EUTF-8;1;1;0;%2Fhome%2Fdenissalem%2Fhd_storage%2Fworks%2FDSight%2Fsrc%2FContexts%2FContextGLFW3.cpp;0;4
-FILE_NAME_1=168;C++;0;EUTF-8;1;1;0;%2Fhome%2Fdenissalem%2Fhd_storage%2Fworks%2FDSight%2Fsrc%2FContexts%2FContextGLFW3.hpp;0;4
-FILE_NAME_2=70;C++;0;EUTF-8;1;1;0;%2Fhome%2Fdenissalem%2Fhd_storage%2Fworks%2FDSight%2Fsrc%2FContexts%2FContextBase.hpp;0;4
-FILE_NAME_3=311;C++;0;EUTF-8;1;1;0;%2Fhome%2Fdenissalem%2Fhd_storage%2Fworks%2FDSight%2Fsrc%2FExceptions%2FExceptionCodes.hpp;0;4
-FILE_NAME_4=305;C++;0;EUTF-8;1;1;0;%2Fhome%2Fdenissalem%2Fhd_storage%2Fworks%2FDSight%2Fsrc%2FExceptions%2FDSightBaseException.cpp;0;4
-FILE_NAME_5=271;C++;0;EUTF-8;1;1;0;%2Fhome%2Fdenissalem%2Fhd_storage%2Fworks%2FDSight%2Fsrc%2FExceptions%2FDSightBaseException.hpp;0;4
-FILE_NAME_6=568;C++;0;EUTF-8;1;1;0;%2Fhome%2Fdenissalem%2Fhd_storage%2Fworks%2FDSight%2Ftest%2FTestContextHandler.cpp;0;4
-FILE_NAME_7=1205;C++;0;EUTF-8;1;1;0;%2Fhome%2Fdenissalem%2Fhd_storage%2Fworks%2FDSight%2Fsrc%2FPythonBinding%2Ftest.cpp;0;4
-FILE_NAME_8=20;Python;0;EUTF-8;1;1;0;%2Fhome%2Fdenissalem%2Fhd_storage%2Fworks%2FDSight%2Fsrc%2FPythonBinding%2Fsetup.py;0;4
+current_page=6
+FILE_NAME_0=846;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2FPython%2FPythonContextHandler.cpp;0;4
+FILE_NAME_1=245;Python;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2FPython%2Fsetup.py.in;0;4
+FILE_NAME_2=70;CMake;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2FPython%2FCMakeLists.txt;0;4
+FILE_NAME_3=303;CMake;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FContexts%2FCMakeLists.txt;0;4
+FILE_NAME_4=269;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FContexts%2FContextHandler.hpp;0;4
+FILE_NAME_5=220;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FContexts%2FContextCodes.hpp;0;4
+FILE_NAME_6=934;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FContexts%2FContextGLFW3.cpp;0;4
 
 [VTE]
-last_dir=/mnt/hd_storage/works/DSight/src/PythonBinding/build/lib.linux-x86_64-3.6
+last_dir=/home/http/dev/github/build
 
 [build-menu]
 C++FT_00_LB=_Compile
@@ -52,10 +50,10 @@ C++FT_02_WD=
 filetypes=C++;
 NF_00_LB=_Make
 NF_00_CM=make
-NF_00_WD=/home/denissalem/hd_storage/works/build
+NF_00_WD=/home/http/dev/github/DSight/build
 NF_01_LB=Make Custom _Target…
 NF_01_CM=make test
-NF_01_WD=/home/denissalem/hd_storage/works/build
+NF_01_WD=/home/http/dev/github/DSight/build
 C++FT_01_LB=_Build
 C++FT_01_CM=cmake ../DSight
-C++FT_01_WD=/home/denissalem/hd_storage/works/build
+C++FT_01_WD=/home/http/dev/github/build

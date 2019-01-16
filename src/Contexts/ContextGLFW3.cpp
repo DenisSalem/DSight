@@ -1,12 +1,14 @@
 #include "../Exceptions/ExceptionCodes.hpp"
 #include "../Exceptions/DSightBaseException.hpp"
 #include "ContextGLFW3.hpp"
+#include <iostream>
 
 namespace DSight {
 	ContextGLFW3::ContextGLFW3() {
 		if (!glfwInit()) {
 			throw DSightBaseException("Context Initialization failed.", DSIGHT_EXCEPTION_CONTEXT_INIT_FAILED);
-		}	
+		}
+		CreateSurface();
 	}
 	
 	int ContextGLFW3::CreateSurface() {
@@ -28,7 +30,7 @@ namespace DSight {
 			glfwSwapBuffers(window);
 			glfwPollEvents();
 		}
-		glfwTerminate();
+		/*glfwTerminate();*/
 	}
 	
 	void ContextGLFW3::DeleteSurface(int index ) {

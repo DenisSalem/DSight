@@ -9,6 +9,7 @@ namespace DSight {
 		public:
 			ContextHandler(ContextCode context_code, int maj, int min);
 			~ContextHandler();
+			void TestDisplayWindow();
 
 		protected:
 			ContextClass * m_wrapper;
