@@ -20,18 +20,18 @@ namespace DSight {
 		}	
 	}
 
-	void ContextGLFW3::TestDisplayWindow() {
+	void ContextGLFW3::LoopRender() {
 		auto window = m_surfaces.back();
 		glfwMakeContextCurrent(window);
 		glfwShowWindow(window);
 		while (!glfwWindowShouldClose(window))
 		{
+			// Callback designer.
 			glClear(GL_COLOR_BUFFER_BIT);
 			glfwSwapBuffers(window);
 			glfwPollEvents();
 		}
 		glfwDestroyWindow(window);
-		/*glfwTerminate();*/
 	}
 	
 	void ContextGLFW3::DeleteSurface(int index ) {
@@ -44,7 +44,6 @@ namespace DSight {
 		throw DSightBaseException("Surface doesn't exists.", DSIGHT_SURFACE_DOESNT_EXISTS);
 	}
 
-	
 	ContextGLFW3::~ContextGLFW3() {
 		glfwTerminate();
 	}

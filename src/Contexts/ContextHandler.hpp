@@ -11,8 +11,9 @@ namespace DSight {
 		public:
 			ContextHandler(ContextCode context_code, int maj, int min);
 			~ContextHandler();
-			void TestDisplayWindow();
-
+			void LoopRender();
+			void SetDesignerCallback();
+			
 		protected:
 			ContextClass * m_wrapper;
 			static int context_count;
