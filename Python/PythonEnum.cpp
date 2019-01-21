@@ -8,10 +8,10 @@ namespace py = pybind11;
 void InitEnum(py::module &m) {
 	py::enum_<DSight::ContextCode>(m, "ContextCode")
         .value("DSIGHT_CONTEXT_GLFW3", DSight::DSIGHT_CONTEXT_GLFW3)
-        .value("DSIGHT_CONTEXT_GTK2", DSight::DSIGHT_CONTEXT_GTK2)
-        .value("DSIGHT_CONTEXT_GTK3", DSight::DSIGHT_CONTEXT_GTK3)
-        .value("DSIGHT_CONTEXT_SDL1", DSight::DSIGHT_CONTEXT_SDL1)
-        .value("DSIGHT_CONTEXT_SDL2", DSight::DSIGHT_CONTEXT_SDL2)
+        .value("DSIGHT_CONTEXT_GTK2_GL", DSight::DSIGHT_CONTEXT_GTK2_GL)
+        .value("DSIGHT_CONTEXT_GTK3_GL", DSight::DSIGHT_CONTEXT_GTK3_GL)
+        .value("DSIGHT_CONTEXT_SDL1_GL", DSight::DSIGHT_CONTEXT_SDL1_GL)
+        .value("DSIGHT_CONTEXT_SDL2_GL", DSight::DSIGHT_CONTEXT_SDL2_GL)
         .export_values();
         
     py::enum_<DSight::ExceptionCode>(m, "ExceptionCode")
@@ -20,5 +20,6 @@ void InitEnum(py::module &m) {
         .value("DSIGHT_EXCEPTION_UNSUPPORTED_CONTEXT", DSight::DSIGHT_EXCEPTION_UNSUPPORTED_CONTEXT)
         .value("DSIGHT_EXCEPTION_SURFACE_CREATION_FAILED", DSight::DSIGHT_EXCEPTION_SURFACE_CREATION_FAILED)
         .value("DSIGHT_SURFACE_DOESNT_EXISTS", DSight::DSIGHT_SURFACE_DOESNT_EXISTS)
+        .value("DSIGHT_MISMATCH_BETWEEN_PARAMS_LENGHT", DSight::DSIGHT_MISMATCH_BETWEEN_PARAMS_LENGHT)
         .export_values();
 }

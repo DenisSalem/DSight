@@ -17,6 +17,7 @@ src_dir ="${CMAKE_CURRENT_SOURCE_DIR}/"
 cpp_sources = [ src_dir+f for f in os.listdir(src_dir) if f[-4:] ==".cpp" ]
 cpp_sources += [ src_dir+"../src/Contexts/" +f for f in os.listdir(src_dir+"../src/Contexts/") if f[-4:] ==".cpp"]
 cpp_sources += [ src_dir+"../src/Exceptions/" +f for f in os.listdir(src_dir+"../src/Exceptions/") if f[-4:] ==".cpp"]
+cpp_sources += [ src_dir+"../src/Charts/" +f for f in os.listdir(src_dir+"../src/Charts/") if f[-4:] ==".cpp"]
 
 example_module = Extension(
     'dsight',
@@ -24,7 +25,8 @@ example_module = Extension(
     sources=cpp_sources,
     libraries=['stdc++']+gl_libs,
     include_dirs = [src_dir+"../src", src_dir]+gl_includes,
-    language='C++' )
+    language='C++',
+    extra_compile_args=['-Wall','-Wextra','-O3'] )
 
 setup(
     name='DSight',

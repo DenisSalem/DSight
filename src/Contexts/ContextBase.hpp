@@ -3,8 +3,7 @@
 namespace DSight {
 	class ContextBase {
 		protected:
-			virtual int CreateSurface() = 0;
-			virtual void DeleteSurface(int index) = 0;
-			std::vector<GLFWwindow*> m_surfaces;
+			virtual void CreateCanvas() = 0;
+			virtual void DeleteCanvas(unsigned int index) = 0;
 	};
 }

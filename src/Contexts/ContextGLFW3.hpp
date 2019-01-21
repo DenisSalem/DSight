@@ -4,13 +4,14 @@
 namespace DSight {
 	class ContextGLFW3 : ContextBase {
 		public:
-			ContextGLFW3();
+			ContextGLFW3(int maj, int min);
 			~ContextGLFW3();
-			void TestDisplayWindow();
+			void LoopRender();
+			void CreateCanvas();
+			void DeleteCanvas(unsigned int index);
 		
-		protected:
-			int CreateSurface();
-			void DeleteSurface(int index);
+		private:
+			std::vector<GLFWwindow*> m_canvas;
 
 	};
 }

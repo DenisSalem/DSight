@@ -13,7 +13,7 @@ add_library(
 )
 target_include_directories(ContextGLFW3 PRIVATE ${OPENGL_INCLUDE_DIR})
 target_link_libraries(ContextGLFW3 ${OPENGL_gl_LIBRARY})
-target_link_libraries(ContextGLFW3 DSightBaseException glfw)
+target_link_libraries(ContextGLFW3 DSightBaseException Histogram glfw)
 endif()
 
 add_library(

@@ -6,21 +6,40 @@
 
 using namespace DSight;
 
-template <typename ContextType> bool SingleContextHandlerInstance() {
+template <typename ContextType> bool DestructorResetStates(ContextCode context_code) {
 	try {
-		ContextHandler<ContextType> context(DSIGHT_CONTEXT_GLFW3, 0, 0);
-		ContextHandler<ContextType> context2(DSIGHT_CONTEXT_GLFW3, 1, 0);
+		auto c1 = new ContextHandler<ContextType>(context_code, 3,3);
+		delete c1;
+		auto c2 = new ContextHandler<ContextType>(context_code, 3,3);
+		delete c2;
+	}
+	catch (const DSightBaseException& e) {
+		if (e.code == DSIGHT_EXCEPTION_MULTIPLE_CONTEXT) {
+			return 0;
+		}
+		throw;
+	}
+	return 1;
+}
+
+
+template <typename ContextType> bool SingleContextHandlerInstance(ContextCode context_code) {
+	try {
+		ContextHandler<ContextType> context(context_code, 3, 3);
+		ContextHandler<ContextType> context2(context_code, 3, 3);
   	}
 	catch (const DSightBaseException& e) {
 		if (e.code == DSIGHT_EXCEPTION_MULTIPLE_CONTEXT) {
 			return 1;
 		}
+		throw;
 	}
 	catch (...) {}
 	return 0;
 }
 
-int main(int argc, char ** argv) {
-	assert(SingleContextHandlerInstance<ContextGLFW3>());
+int main() {
+	assert(SingleContextHandlerInstance<ContextGLFW3>(DSIGHT_CONTEXT_GLFW3));
+	assert(DestructorResetStates<ContextGLFW3>(DSIGHT_CONTEXT_GLFW3));
 	return 0;
 }
