@@ -15,15 +15,15 @@ namespace DSight {
 	
 	void ContextGLFW3::CreateCanvas() {
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); 
-		m_canvas.push_back(glfwCreateWindow(640, 480, "Hello World", NULL, NULL));
-		if (!m_canvas.back()) {
+		m_windows.push_back(glfwCreateWindow(640, 480, "Hello World", NULL, NULL));
+		if (!m_windows.back()) {
 			glfwTerminate();
-			throw DSightBaseException("Surface creation failed.", DSIGHT_EXCEPTION_SURFACE_CREATION_FAILED);
+			throw DSightBaseException("Canvas creation failed.", DSIGHT_EXCEPTION_CANVAS_CREATION_FAILED);
 		}	
 	}
 
 	void ContextGLFW3::LoopRender() {
-		auto window = m_canvas.back();
+		auto window = m_windows.back();
 		glfwMakeContextCurrent(window);
 		glfwShowWindow(window);
 		while (!glfwWindowShouldClose(window))
@@ -37,13 +37,13 @@ namespace DSight {
 	}
 	
 	void ContextGLFW3::DeleteCanvas(unsigned int index ) {
-		size_t size = m_canvas.size();
+		size_t size = m_windows.size();
 		if (index < size) {
-			glfwDestroyWindow(m_canvas[index]);
-			m_canvas.erase(m_canvas.begin() + index);
+			glfwDestroyWindow(m_windows[index]);
+			m_windows.erase(m_windows.begin() + index);
 			return;
 		}
-		throw DSightBaseException("Surface doesn't exists.", DSIGHT_SURFACE_DOESNT_EXISTS);
+		throw DSightBaseException("Canvas doesn't exists.", DSIGHT_EXCEPTION_CANVAS_DOESNT_EXISTS);
 	}
 
 	ContextGLFW3::~ContextGLFW3() {

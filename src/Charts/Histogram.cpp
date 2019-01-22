@@ -9,7 +9,7 @@ namespace DSight {
 	
 	void Histogram::SetPair(std::vector<float> * values, std::vector<float> * frequencies) {
 		if (values->size() != frequencies->size()) {
-			throw DSight::DSightBaseException("Mismatch between parameters lenght.", DSIGHT_MISMATCH_BETWEEN_PARAMS_LENGHT);
+			throw DSight::DSightBaseException("Mismatch between parameters lenght.", DSIGHT_EXCEPTION_MISMATCH_BETWEEN_PARAMS_LENGHT);
 		}
 		m_pair_values_frequencies = new std::vector<std::pair<float, float>>();
 		for (unsigned int i = 0; i < values->size(); i++) {

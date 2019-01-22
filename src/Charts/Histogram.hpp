@@ -1,5 +1,5 @@
-#ifndef _HISTOGRAM_HPP_INCLUDED_
-#define _HISTOGRAM_HPP_INCLUDED_
+#ifndef _DSIGHT_HISTOGRAM_HPP_INCLUDED_
+#define _DSIGHT_HISTOGRAM_HPP_INCLUDED_
 
 #include <utility>
 #include <vector>

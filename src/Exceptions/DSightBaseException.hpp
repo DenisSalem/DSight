@@ -1,3 +1,6 @@
+#ifndef _DSIGHT_BASE_EXCEPTION_HPP_INCLUDED_
+#define _DSIGHT_BASE_EXCEPTION_HPP_INCLUDED_
+
 #include <string>
 #include <exception>
 #include "ExceptionCodes.hpp"
@@ -11,3 +14,5 @@ namespace DSight {
 			ExceptionCode code;
 	};
 }
+
+#endif

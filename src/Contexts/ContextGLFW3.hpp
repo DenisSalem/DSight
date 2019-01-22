@@ -11,7 +11,7 @@ namespace DSight {
 			void DeleteCanvas(unsigned int index);
 		
 		private:
-			std::vector<GLFWwindow*> m_canvas;
+			std::vector<GLFWwindow*> m_windows;
 
 	};
 }

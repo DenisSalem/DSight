@@ -1,5 +1,12 @@
+#ifndef _DSIGHT_CONTEXT_HANDLER_HPP_INCLUDED_
+#define _DSIGHT_CONTEXT_HANDLER_HPP_INCLUDED_
+
 #include "../Charts/HistogramCPU.hpp"
+#include "../Canvas/Canvas.hpp"
+
+#ifdef _USE_GLFW3_
 #include "../Charts/HistogramGL.hpp"
+#endif
 
 #include "ContextCodes.hpp"
 
@@ -13,16 +20,17 @@ namespace DSight {
 			ContextHandler(ContextCode context_code, int maj, int min);
 			~ContextHandler();
 			
-			DSight::Canvas * AddCanvas(unsigned int horizontal_subdivision, unsigned int vertical_subdivision);
-			void AddViewport(unsigned int canvas_index, unsigned int x, unsigned int y, unsigned int width, unsigned hint height);
-			DSight::Histogram * AddHistogram(unsigned int canvas_index);
-			DSight::Histogram * AddHistogram(unsigned int canvas_index, unsigned int viewport_id);
+			Canvas * AddCanvas(unsigned int horizontal_subdivision, unsigned int vertical_subdivision);
+			Histogram * AddHistogram(unsigned int canvas_index);
+			Histogram * AddHistogram(unsigned int canvas_index, unsigned int viewport_id);
 			
 		private:
 			ContextCode m_context_code;
-			std::vector<unsigned char> grid;
 			ContextClass * m_wrapper;
+			std::vector<Canvas> m_canvas;
 			static int context_count;
 			void SetDesignerCallback();
 	};
 }
+
+#endif
