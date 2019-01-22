@@ -1,5 +1,5 @@
-#ifndef _EXCEPTION_CODES_HPP_INCLUDED_
-#define _EXCEPTION_CODES_HPP_INCLUDED_
+#ifndef EXCEPTION_CODES_HPP_INCLUDED
+#define EXCEPTION_CODES_HPP_INCLUDED
 
 namespace DSight {
 	enum ExceptionCode {

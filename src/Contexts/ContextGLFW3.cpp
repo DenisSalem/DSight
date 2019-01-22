@@ -1,6 +1,7 @@
 #include "../Exceptions/ExceptionCodes.hpp"
 #include "../Exceptions/DSightBaseException.hpp"
 #include "ContextGLFW3.hpp"
+#include <iostream>
 
 namespace DSight {
 	ContextGLFW3::ContextGLFW3(int maj, int min) {
@@ -10,7 +11,7 @@ namespace DSight {
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, maj);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, min);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		//CreateSurface();
+		
 	}
 	
 	void ContextGLFW3::CreateCanvas() {

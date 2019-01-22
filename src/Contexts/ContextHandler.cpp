@@ -27,23 +27,20 @@ namespace DSight {
 	}
 	
 	template <typename ContextClass>
-	DSight::Histogram * ContextHandler<ContextClass>::AddCanvas(unsigned int horizontal_subdivision, unsigned int vertical_subdivision) {
+	Canvas * ContextHandler<ContextClass>::AddCanvas(unsigned int horizontal_subdivision, unsigned int vertical_subdivision) {
 		m_wrapper->CreateCanvas();
+		m_canvas.push_back(
+			new Canvas(horizontal_subdivision, vertical_subdivision)
+		);
+		return m_canvas.back();
 	}
 	
 	template <typename ContextClass>
-	DSight::Histogram * ContextHandler<ContextClass>::AddHistogram() {
-		switch (m_context_code) {
-			case DSIGHT_CONTEXT_GLFW3:
-				return new DSight::HistogramGL();
-				break;
-			default:
-				return new DSight::HistogramCPU();
-		}
-	}	
-	
-	template <typename ContextClass>
 	ContextHandler<ContextClass>::~ContextHandler() {
+		for (unsigned int i = 0; i< m_canvas.size(); i++) {
+			delete m_canvas[i];
+		}
+		
 		switch (m_context_code) {
 			case DSight::DSIGHT_CONTEXT_GLFW3:
 				m_wrapper->~ContextGLFW3();

@@ -1,12 +1,14 @@
-#ifndef _DSIGHT_HISTOGRAM_HPP_INCLUDED_
-#define _DSIGHT_HISTOGRAM_HPP_INCLUDED_
+#ifndef DSIGHT_HISTOGRAM_HPP_INCLUDED
+#define DSIGHT_HISTOGRAM_HPP_INCLUDED
 
 #include <utility>
 #include <vector>
 #include <iostream>
 
+#include "Chart.hpp"
+
 namespace DSight {
-	class Histogram {
+	class Histogram : public Chart {
 		public:
 			~Histogram();
 			void SetPair(std::vector<float> * values, std::vector<float> * frequencies);

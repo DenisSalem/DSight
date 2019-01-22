@@ -13,7 +13,7 @@ add_library(
 )
 target_include_directories(ContextGLFW3 PRIVATE ${OPENGL_INCLUDE_DIR})
 target_link_libraries(ContextGLFW3 ${OPENGL_gl_LIBRARY})
-target_link_libraries(ContextGLFW3 DSightBaseException Histogram glfw)
+target_link_libraries(ContextGLFW3 DSightBaseException glfw)
 endif()
 
 add_library(
@@ -21,7 +21,7 @@ add_library(
 	ContextHandler.cpp
 )
 
-target_link_libraries(Context DSightBaseException)
+target_link_libraries(Context DSightBaseException Canvas)
 if(DEFINED USE_GLFW3)
 target_link_libraries(Context ContextGLFW3)
 endif()

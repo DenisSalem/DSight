@@ -1,29 +1,21 @@
 #ifndef _DSIGHT_CANVAS_HPP_INCLUDED_
 #define _DSIGHT_CANVAS_HPP_INCLUDED_
 
-#include "../Exceptions/ExceptionCodes.hpp"
-#include "../Exceptions/DSightBaseException.hpp"
-#include "../Contexts/ContextHandler.hpp"
+#include "../Area.hpp"
 #include "../Viewport/Viewport.hpp"
 
 namespace DSight {
-	struct Area{
-		unsigned int tl;
-		unsigned int br;
-	};
-	
 	class Canvas {
 		public:
-			Canvas(unsigned int horizontal_subdivision, unsigned int vertical_subdivision);			
-			Viewport * AddViewport();
+			Canvas(unsigned int horizontal_subdivision, unsigned int vertical_subdivision);
+			~Canvas();		
+			Viewport * AddViewport(unsigned int tl_x, unsigned int tl_y, unsigned int br_x, unsigned int br_y);
 			
 		private:
 			bool Overlap(Area new_area);
 			unsigned int m_horizontal_subdivision;
 			unsigned int m_vertical_subdivision;
-			unsigned int m_canvas_index;
-			std::vector<Viewport> m_viewports;
-			ContextHandler<ContextType> * m_context_handler;
+			std::vector<Viewport *> m_viewports;
 	};
 }
 
