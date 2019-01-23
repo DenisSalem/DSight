@@ -1,0 +1,39 @@
+#! /usr/bin/python3
+
+from setuptools import setup, Extension
+import os
+
+defines = []
+gl_libs = []
+gl_includes = []
+
+if ${USE_GLFW3}:
+	defines.append(("_USE_GLFW3_", 1))
+	gl_libs = ['GL', 'glfw']
+	gl_includes = ["${OPENGL_INCLUDE_DIR}"]
+
+src_dir ="${CMAKE_CURRENT_SOURCE_DIR}/"
+
+cpp_sources = [ src_dir+f for f in os.listdir(src_dir) if f[-4:] ==".cpp" ]
+cpp_sources += [ src_dir+"../src/Exceptions/" +f for f in os.listdir(src_dir+"../src/Exceptions/") if f[-4:] ==".cpp"]
+cpp_sources += [ src_dir+"../src/Charts/" +f for f in os.listdir(src_dir+"../src/Charts/") if f[-4:] ==".cpp"]
+cpp_sources += [ src_dir+"../src/Viewport/" +f for f in os.listdir(src_dir+"../src/Viewport/") if f[-4:] ==".cpp"]
+cpp_sources += [ src_dir+"../src/Canvas/" +f for f in os.listdir(src_dir+"../src/Canvas/") if f[-4:] ==".cpp"]
+cpp_sources += [ src_dir+"../src/Contexts/" +f for f in os.listdir(src_dir+"../src/Contexts/") if f[-4:] ==".cpp"]
+
+example_module = Extension(
+    'dsight',
+    define_macros = defines,
+    sources=cpp_sources,
+    libraries=['stdc++']+gl_libs,
+    include_dirs = [src_dir+"../src", src_dir]+gl_includes,
+    language='C++',
+    extra_compile_args=['-Wall','-Wextra','-O3'] )
+
+setup(
+    name='DSight',
+    zip_safe=False,
+    version='${PACKAGE_VERSION}',
+    description='A Chart library. Low level implementation, High level API',
+    ext_modules=[example_module],
+)
