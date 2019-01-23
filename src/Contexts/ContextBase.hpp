@@ -2,7 +2,7 @@
 
 namespace DSight {
 	class ContextBase {
-		protected:
+		public:
 			virtual void CreateCanvas() = 0;
 			virtual void DeleteCanvas(unsigned int index) = 0;
 	};

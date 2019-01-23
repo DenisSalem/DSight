@@ -3,11 +3,11 @@
 #include "ContextHandler.hpp"
 
 namespace DSight {
-	template <typename ContextClass>
-	int ContextHandler<ContextClass>::context_count = 0;
+	//~ template <typename ContextClass>
+	int ContextHandler::context_count = 0;
 
-	template <typename ContextClass>
-	ContextHandler<ContextClass>::ContextHandler(ContextCode context_code, int maj, int min) : m_context_code(context_code) {
+	//~ template <typename ContextClass>
+	ContextHandler::ContextHandler(ContextCode context_code, int maj, int min) : m_context_code(context_code) {
 		if (ContextHandler::context_count > 0) {
 			throw DSightBaseException("Multiple Context.", DSIGHT_EXCEPTION_MULTIPLE_CONTEXT);
 		}
@@ -26,8 +26,8 @@ namespace DSight {
 		}
 	}
 	
-	template <typename ContextClass>
-	Canvas * ContextHandler<ContextClass>::AddCanvas(unsigned int horizontal_subdivision, unsigned int vertical_subdivision) {
+	//~ template <typename ContextClass>
+	Canvas * ContextHandler::AddCanvas(unsigned int horizontal_subdivision, unsigned int vertical_subdivision) {
 		m_wrapper->CreateCanvas();
 		m_canvas.push_back(
 			new Canvas(horizontal_subdivision, vertical_subdivision)
@@ -35,15 +35,14 @@ namespace DSight {
 		return m_canvas.back();
 	}
 	
-	template <typename ContextClass>
-	ContextHandler<ContextClass>::~ContextHandler() {
+	ContextHandler::~ContextHandler() {
 		for (unsigned int i = 0; i< m_canvas.size(); i++) {
 			delete m_canvas[i];
 		}
 		
 		switch (m_context_code) {
 			case DSight::DSIGHT_CONTEXT_GLFW3:
-				m_wrapper->~ContextGLFW3();
+				((ContextGLFW3 *) m_wrapper)->~ContextGLFW3();
 				break;
 				
 			default:
@@ -52,7 +51,7 @@ namespace DSight {
 		ContextHandler::context_count = 0;
 	}
 	
-	#ifdef _USE_GLFW3_
-	template class ContextHandler<ContextGLFW3>;
-	#endif
+	//~ #ifdef _USE_GLFW3_
+	//~ template class ContextHandler<ContextGLFW3>;
+	//~ #endif
 }

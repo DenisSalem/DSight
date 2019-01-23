@@ -17,8 +17,6 @@ set(
 	${CHART_SOURCE}
 	HistogramGL.cpp
 )
-
-message(STATUS "!!! DEPS: ${CHART_SOURCE} !!!")
 endif()
 
 

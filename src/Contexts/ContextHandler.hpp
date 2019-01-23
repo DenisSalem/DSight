@@ -9,7 +9,7 @@
 #endif
 
 namespace DSight {
-	template <typename ContextClass> class ContextHandler {
+	class ContextHandler {
 		public:
 			ContextHandler(ContextCode context_code, int maj, int min);
 			~ContextHandler();
@@ -18,7 +18,7 @@ namespace DSight {
 			
 		private:
 			ContextCode m_context_code;
-			ContextClass * m_wrapper;
+			ContextBase * m_wrapper;
 			std::vector<Canvas *> m_canvas;
 			static int context_count;
 	};

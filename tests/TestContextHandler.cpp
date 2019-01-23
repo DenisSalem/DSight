@@ -6,11 +6,11 @@
 
 using namespace DSight;
 
-template <typename ContextType> bool DestructorResetStates(ContextCode context_code) {
+bool DestructorResetStates(ContextCode context_code) {
 	try {
-		auto c1 = new ContextHandler<ContextType>(context_code, 3,3);
+		auto c1 = new ContextHandler(context_code, 3,3);
 		delete c1;
-		auto c2 = new ContextHandler<ContextType>(context_code, 3,3);
+		auto c2 = new ContextHandler(context_code, 3,3);
 		delete c2;
 	}
 	catch (const DSightBaseException& e) {
@@ -23,10 +23,10 @@ template <typename ContextType> bool DestructorResetStates(ContextCode context_c
 }
 
 
-template <typename ContextType> bool SingleContextHandlerInstance(ContextCode context_code) {
+bool SingleContextHandlerInstance(ContextCode context_code) {
 	try {
-		ContextHandler<ContextType> context(context_code, 3, 3);
-		ContextHandler<ContextType> context2(context_code, 3, 3);
+		ContextHandler context(context_code, 3, 3);
+		ContextHandler context2(context_code, 3, 3);
   	}
 	catch (const DSightBaseException& e) {
 		if (e.code == DSIGHT_EXCEPTION_MULTIPLE_CONTEXT) {
@@ -39,7 +39,7 @@ template <typename ContextType> bool SingleContextHandlerInstance(ContextCode co
 }
 
 int main() {
-	assert(SingleContextHandlerInstance<ContextGLFW3>(DSIGHT_CONTEXT_GLFW3));
-	assert(DestructorResetStates<ContextGLFW3>(DSIGHT_CONTEXT_GLFW3));
+	assert(SingleContextHandlerInstance(DSIGHT_CONTEXT_GLFW3));
+	assert(DestructorResetStates(DSIGHT_CONTEXT_GLFW3));
 	return 0;
 }
