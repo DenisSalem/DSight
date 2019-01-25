@@ -28,7 +28,7 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=27
+current_page=12
 FILE_NAME_0=221;CMake;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FCharts%2FCMakeLists.txt;0;4
 FILE_NAME_1=220;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FCharts%2FHistogram.hpp;0;4
 FILE_NAME_2=843;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FCharts%2FHistogram.cpp;0;4
@@ -41,29 +41,29 @@ FILE_NAME_8=102;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%
 FILE_NAME_9=601;CMake;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2FCMakeLists.txt;0;4
 FILE_NAME_10=483;CMake;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FContexts%2FCMakeLists.txt;0;4
 FILE_NAME_11=36;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FExceptions%2FExceptionCodes.hpp;0;4
-FILE_NAME_12=870;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Ftests%2FTestContextHandler.cpp;0;4
+FILE_NAME_12=848;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Ftests%2FTestContextHandler.cpp;0;4
 FILE_NAME_13=209;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FContexts%2FContextGLFW3.cpp;0;4
 FILE_NAME_14=100;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FContexts%2FContextGLFW3.hpp;0;4
 FILE_NAME_15=67;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FContexts%2FContextBase.hpp;0;4
 FILE_NAME_16=1656;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FCanvas%2FCanvas.cpp;0;4
 FILE_NAME_17=511;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FCanvas%2FCanvas.hpp;0;4
-FILE_NAME_18=85;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FExceptions%2FDSightBaseException.hpp;0;4
-FILE_NAME_19=65;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FArea.hpp;0;4
-FILE_NAME_20=353;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FViewport%2FViewport.hpp;0;4
-FILE_NAME_21=86;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FViewport%2FViewport.cpp;0;4
-FILE_NAME_22=170;CMake;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FCanvas%2FCMakeLists.txt;0;4
-FILE_NAME_23=173;CMake;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FViewport%2FCMakeLists.txt;0;4
-FILE_NAME_24=62;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FCharts%2FChart.hpp;0;4
-FILE_NAME_25=176;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FCharts%2FChart.cpp;0;4
-FILE_NAME_26=374;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2FPython%2FPythonDSight.cpp;0;4
-FILE_NAME_27=2741;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2FPython%2FPythonContextHandler.cpp;0;4
-FILE_NAME_28=165;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2FPython%2FPythonContextHandler.hpp;0;4
-FILE_NAME_29=384;Python;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2FPython%2Fsetup.py.in;0;4
-FILE_NAME_30=0;CMake;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2FPython%2FCMakeLists.txt;0;4
-FILE_NAME_31=128;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FContexts%2FContextCodes.hpp;0;4
+FILE_NAME_18=65;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FArea.hpp;0;4
+FILE_NAME_19=353;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FViewport%2FViewport.hpp;0;4
+FILE_NAME_20=86;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FViewport%2FViewport.cpp;0;4
+FILE_NAME_21=165;CMake;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FCanvas%2FCMakeLists.txt;0;4
+FILE_NAME_22=169;CMake;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FViewport%2FCMakeLists.txt;0;4
+FILE_NAME_23=62;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FCharts%2FChart.hpp;0;4
+FILE_NAME_24=176;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FCharts%2FChart.cpp;0;4
+FILE_NAME_25=549;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2FPython%2FPythonDSight.cpp;0;4
+FILE_NAME_26=1246;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2FPython%2FPythonContextHandler.cpp;0;4
+FILE_NAME_27=213;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2FPython%2FPythonContextHandler.hpp;0;4
+FILE_NAME_28=384;Python;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2FPython%2Fsetup.py.in;0;4
+FILE_NAME_29=0;CMake;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2FPython%2FCMakeLists.txt;0;4
+FILE_NAME_30=136;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2Fsrc%2FContexts%2FContextCodes.hpp;0;4
+FILE_NAME_31=32;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhttp%2Fdev%2Fgithub%2FDSight%2FPython%2FPythonExceptionWrapper.cpp;0;4
 
 [VTE]
-last_dir=/home/http/dev/github/DSight
+last_dir=/home/http/dev/github/DSight/Python/tests
 
 [build-menu]
 C++FT_00_LB=_Compile
