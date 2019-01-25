@@ -1,17 +1,12 @@
-#include "PythonContextHandler.hpp"
 #include "PythonExceptionWrapper.hpp"
+#include "PythonCanvas.hpp"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-PyObject * 
-AddCanvas(PythonContextHandlerObject *self, PyObject * args, PyObject * kw) {
-	return Canvas_C_Side_init(self->cpp_obj->AddCanvas(3,3));
-}
-
 static void
-ContextHandler_dealloc(PythonContextHandlerObject *self)
+Canvas_dealloc(PythonCanvasObject *self)
 {
 	PyObject *error_type, *error_value, *error_traceback;
     PyErr_Fetch(&error_type, &error_value, &error_traceback);
@@ -27,60 +22,27 @@ ContextHandler_dealloc(PythonContextHandlerObject *self)
 }
 
 static PyObject *
-ContextHandler_init(PyTypeObject *type, PyObject *args, PyObject *kw)
+Canvas_init(PyTypeObject *type, PyObject *args, PyObject *kw)
 {
-    PythonContextHandlerObject * self;
-    self = (PythonContextHandlerObject *) type->tp_alloc(type, 0);
- 
-	int context_code, maj, min;
-	if (!PyArg_ParseTuple(args, "iii", &context_code, &maj, &min)) {
-		PyErr_BadArgument();
-		return NULL;
-	}
-    
-    if (self != NULL) {
-		try {
-			self->cpp_obj = new DSight::ContextHandler((DSight::ContextCode) context_code, maj, min);
-		} catch (std::bad_alloc&) {
-			return PyErr_NoMemory();
-		}
-		catch (DSight::BaseException& e) {
-			//PyErr_Format(PyLong_FromLong(42), "%s", e.message.c_str());
-			//~ PyObject_SetAttrString(PythonBaseException, "code", PyLong_FromLong((long int) e.code));
-			//~ PyObject * code = PyObject_GetAttrString(PythonBaseException, "code");
-			//e = BaseException_init(PythonBaseException,
-			PyObject* py_e = Py_BuildValue("(s,i)", e.message.c_str(), e.code);
-			PyErr_SetObject(PythonExceptionWrapper, py_e);
-			
-			return NULL;
-		}
-    }
-    
-    return (PyObject *) self;
+	PyErr_SetString(PythonExceptionWrapper, "Object must be returned by ContextHander.AddCanvas().");
+	return NULL;
 }
 
-static PyMethodDef ContextHandler_methods[] = {
-    {"AddCanvas", (PyCFunction) AddCanvas, METH_NOARGS,
-     "Add Canvas"
-    },
-    {NULL}  /* Sentinel */
-};
-
-PyTypeObject PythonContextHandler = {
+PyTypeObject PythonCanvas = {
     PyVarObject_HEAD_INIT(NULL, 0)
     
     // For printing, in format "<module>.<name>"
     
-    "dsight.ContextHandler", // char *tp_name 
+    "dsight.Canvas", // char *tp_name 
     
     // For allocation
 	
-	sizeof(PythonContextHandlerObject), //int tp_basicsize 
+	sizeof(PythonCanvasObject), //int tp_basicsize 
 	0, //int tp_itemsize
 	
 	// Methods to implement standard operations
     
-    (destructor) ContextHandler_dealloc, //destructor tp_dealloc
+    (destructor) Canvas_dealloc, //destructor tp_dealloc
     0, //printfunc tp_print
     0, //getattrfunc tp_getattr
     0, //etattrfunc tp_setattr
@@ -109,7 +71,7 @@ PyTypeObject PythonContextHandler = {
     Py_TPFLAGS_DEFAULT, //long tp_flags
 
 	// Documentation string
-    "Context Handler", //char *tp_doc
+    "Canvas", //char *tp_doc
 
     // Assigned meaning in release 2.0
     // call function for all accessible objects
@@ -127,7 +89,7 @@ PyTypeObject PythonContextHandler = {
 
     // weak reference enabler
     
-    offsetof(PythonContextHandlerObject, weakreflist), //long tp_weaklistoffset
+    offsetof(PythonCanvasObject, weakreflist), //long tp_weaklistoffset
 
     // Added in release 2.2
     // Iterators
@@ -137,7 +99,7 @@ PyTypeObject PythonContextHandler = {
 
     // Attribute descriptor and subclassing stuff
     
-    ContextHandler_methods, //struct PyMethodDef *tp_methods
+    0, //struct PyMethodDef *tp_methods
     0, //struct PyMemberDef *tp_members
     0, //struct PyGetSetDef *tp_getset
     0, //struct _typeobject *tp_base
@@ -147,7 +109,7 @@ PyTypeObject PythonContextHandler = {
     0, //long tp_dictoffset
     0, //initproc tp_init
     0, //allocfunc tp_alloc
-    ContextHandler_init, //newfunc tp_new
+    Canvas_init, //newfunc tp_new
     
     // Low-level free-memory routine
     
@@ -171,6 +133,15 @@ PyTypeObject PythonContextHandler = {
     0, //unsigned int tp_version_tag
     0, //destructor tp_finalize
 };
+
+PyObject *
+Canvas_C_Side_init(DSight::Canvas * canvas)
+{
+	PythonCanvasObject * self;
+    self = (PythonCanvasObject *) PythonCanvas.tp_alloc(&PythonCanvas, 0);
+	self->cpp_obj = canvas;
+	return (PyObject *) self;
+}
 
 #ifdef __cplusplus
 }

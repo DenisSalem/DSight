@@ -4,6 +4,7 @@
 
 namespace DSight {
 	int ContextHandler::context_count = 0;
+	int ContextHandler::allow_add_canvas = 0;
 
 	ContextHandler::ContextHandler(ContextCode context_code, int maj, int min) : m_context_code(context_code) {
 		if (ContextHandler::context_count > 0) {
@@ -25,11 +26,14 @@ namespace DSight {
 	}
 	
 	Canvas * ContextHandler::AddCanvas(unsigned int horizontal_subdivision, unsigned int vertical_subdivision) {
+		allow_add_canvas = 1;
 		m_wrapper->CreateCanvas();
 		m_canvas.push_back(
 			new Canvas(horizontal_subdivision, vertical_subdivision)
 		);
+		allow_add_canvas = 0;
 		return m_canvas.back();
+		
 	}
 	
 	ContextHandler::~ContextHandler() {

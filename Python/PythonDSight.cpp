@@ -1,6 +1,8 @@
 #include <python3.6m/Python.h>
 #include "Contexts/ContextCodes.hpp"
 #include "Exceptions/ExceptionCodes.hpp"
+
+#include "PythonCanvas.hpp"
 #include "PythonContextHandler.hpp"
 #include "PythonExceptionWrapper.hpp"
 
@@ -27,7 +29,10 @@ PyInit_dsight(void)
 
     if (PyType_Ready(&PythonContextHandler) < 0)
         return NULL;
-                
+        
+    if (PyType_Ready(&PythonCanvas) < 0)
+        return NULL;
+                       
     m = PyModule_Create(&dsight);
     if (m == NULL) {
         return NULL;
@@ -43,6 +48,9 @@ PyInit_dsight(void)
 
     Py_INCREF(&PythonContextHandler);
     PyModule_AddObject(m, "ContextHandler", (PyObject *) &PythonContextHandler);
+    
+    Py_INCREF(&PythonCanvas);
+    PyModule_AddObject(m, "Canvas", (PyObject *) &PythonCanvas);
 
 	// DEFINES CONSTANTS
   
