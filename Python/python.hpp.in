@@ -1,0 +1,2 @@
+#include <${PYTHON_HEADER_DIR}/Python.h>
+#include <${PYTHON_HEADER_DIR}/structmember.h>

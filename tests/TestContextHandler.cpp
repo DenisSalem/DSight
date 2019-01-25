@@ -1,20 +1,18 @@
 #include "Contexts/ContextCodes.hpp"
 #include "Contexts/ContextHandler.hpp"
 #include "Exceptions/ExceptionCodes.hpp"
-#include "Exceptions/DSightBaseException.hpp"
+#include "Exceptions/BaseException.hpp"
 #include <assert.h>
 
-using namespace DSight;
-
-bool DestructorResetStates(ContextCode context_code) {
+bool DestructorResetStates(DSight::ContextCode context_code) {
 	try {
-		auto c1 = new ContextHandler(context_code, 3,3);
+		auto c1 = new DSight::ContextHandler(context_code, 3,3);
 		delete c1;
-		auto c2 = new ContextHandler(context_code, 3,3);
+		auto c2 = new DSight::ContextHandler(context_code, 3,3);
 		delete c2;
 	}
-	catch (const DSightBaseException& e) {
-		if (e.code == DSIGHT_EXCEPTION_MULTIPLE_CONTEXT) {
+	catch (const DSight::BaseException& e) {
+		if (e.code == DSight::ExceptionCode::MULTIPLE_CONTEXT) {
 			return 0;
 		}
 		throw;
@@ -23,13 +21,13 @@ bool DestructorResetStates(ContextCode context_code) {
 }
 
 
-bool SingleContextHandlerInstance(ContextCode context_code) {
+bool SingleContextHandlerInstance(DSight::ContextCode context_code) {
 	try {
-		ContextHandler context(context_code, 3, 3);
-		ContextHandler context2(context_code, 3, 3);
+		DSight::ContextHandler context(context_code, 3, 3);
+		DSight::ContextHandler context2(context_code, 3, 3);
   	}
-	catch (const DSightBaseException& e) {
-		if (e.code == DSIGHT_EXCEPTION_MULTIPLE_CONTEXT) {
+	catch (const DSight::BaseException& e) {
+		if (e.code == DSight::ExceptionCode::MULTIPLE_CONTEXT) {
 			return 1;
 		}
 		throw;
@@ -39,7 +37,7 @@ bool SingleContextHandlerInstance(ContextCode context_code) {
 }
 
 int main() {
-	assert(SingleContextHandlerInstance(DSIGHT_CONTEXT_GLFW3));
-	assert(DestructorResetStates(DSIGHT_CONTEXT_GLFW3));
+	assert(SingleContextHandlerInstance(DSight::ContextCode::GLFW3));
+	assert(DestructorResetStates(DSight::ContextCode::GLFW3));
 	return 0;
 }

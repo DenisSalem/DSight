@@ -5,7 +5,7 @@ namespace DSight {
 	
 	Histogram * Viewport::SetHistogram() {
 		switch (m_context_code) {
-			case DSIGHT_CONTEXT_GLFW3:
+			case ContextCode::GLFW3:
 				return new DSight::HistogramGL();
 				break;
 			default:

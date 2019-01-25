@@ -26,7 +26,7 @@ example_module = Extension(
     define_macros = defines,
     sources=cpp_sources,
     libraries=['stdc++']+gl_libs,
-    include_dirs = [src_dir+"../src", src_dir]+gl_includes,
+    include_dirs = [src_dir+"../src", "${CMAKE_BINARY_DIR}/Python", src_dir]+gl_includes,
     language='C++',
     extra_compile_args=['-Wall','-Wextra','-O3'] )
 

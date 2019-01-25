@@ -1,5 +1,5 @@
 #include "../Exceptions/ExceptionCodes.hpp"
-#include "../Exceptions/DSightBaseException.hpp"
+#include "../Exceptions/BaseException.hpp"
 #include "Canvas.hpp"
 
 namespace DSight {
@@ -13,7 +13,7 @@ namespace DSight {
 	}
 	
 	Viewport * Canvas::AddViewport(unsigned int tl_x, unsigned int tl_y, unsigned int br_x, unsigned int br_y) {
-		Area a = {
+		Area area = {
 			tl_x,
 			tl_y,
 			br_x,
@@ -22,18 +22,18 @@ namespace DSight {
 		
 		// TEST IF NOT OUT OF BOUND
 		if (tl_x >= m_horizontal_subdivision || br_x >= m_horizontal_subdivision || tl_y >= m_vertical_subdivision || br_y >= m_vertical_subdivision) {
-			throw DSightBaseException("Invalid Coordinates.", DSIGHT_EXCEPTION_INVALID_COORDINATES);
+			throw DSight::BaseException("Invalid Coordinates.", ExceptionCode::INVALID_COORDINATES);
 		}
 		// TEST IF WELL FORMED
 		if(tl_x > br_x || tl_y > br_y) {
-			throw DSightBaseException("Invalid Coordinates.", DSIGHT_EXCEPTION_INVALID_COORDINATES);
+			throw DSight::BaseException("Invalid Coordinates.", ExceptionCode::INVALID_COORDINATES);
 		}
 
-		if (Overlap(a)) {
-			throw DSightBaseException("Invalid Coordinates.", DSIGHT_EXCEPTION_INVALID_COORDINATES);
+		if (Overlap(area)) {
+			throw DSight::BaseException("Invalid Coordinates.", ExceptionCode::INVALID_COORDINATES);
 		}
 		m_viewports.push_back(
-			new Viewport(a)
+			new Viewport(area)
 		);
 		return m_viewports.back();
 	}

@@ -3,7 +3,6 @@
 namespace DSight {
 	class HistogramGL : public Histogram {
 		public:
-			void Draw();
-			
+			void Draw();			
 	};
 }

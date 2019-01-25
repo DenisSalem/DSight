@@ -1,5 +1,8 @@
 #include <python3.6m/Python.h>
+#include "Contexts/ContextCodes.hpp"
+#include "Exceptions/ExceptionCodes.hpp"
 #include "PythonContextHandler.hpp"
+#include "PythonExceptionWrapper.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -21,15 +24,37 @@ PyMODINIT_FUNC
 PyInit_dsight(void)
 {
     PyObject *m;
+
     if (PyType_Ready(&PythonContextHandler) < 0)
         return NULL;
-
+                
     m = PyModule_Create(&dsight);
-    if (m == NULL)
+    if (m == NULL) {
         return NULL;
+	}
+
+	// DEFINES EXCEPTIONS
+		
+	PythonExceptionWrapper = PyErr_NewException("dsight.ExceptionPythonWrapper", NULL, NULL);
+	Py_INCREF(PythonExceptionWrapper);
+    PyModule_AddObject(m, "PythonExceptionWrapper", PythonExceptionWrapper);
+
+	// DEFINES PUBLIC OBJECTS
 
     Py_INCREF(&PythonContextHandler);
     PyModule_AddObject(m, "ContextHandler", (PyObject *) &PythonContextHandler);
+
+	// DEFINES CONSTANTS
+  
+    PyModule_AddIntConstant(m, "CONTEXT_CODE_GLFW3", (long int) DSight::ContextCode::GLFW3);
+    PyModule_AddIntConstant(m, "EXCEPTION_CODE_CANVAS_CREATION_FAILED", (long int) DSight::ExceptionCode::CANVAS_CREATION_FAILED);
+    PyModule_AddIntConstant(m, "EXCEPTION_CODE_CANVAS_DOESNT_EXISTS", (long int) DSight::ExceptionCode::CANVAS_DOESNT_EXISTS);
+    PyModule_AddIntConstant(m, "EXCEPTION_CODE_CONTEXT_INIT_FAILED", (long int) DSight::ExceptionCode::CONTEXT_INIT_FAILED);
+    PyModule_AddIntConstant(m, "EXCEPTION_CODE_INVALID_COORDINATES", (long int) DSight::ExceptionCode::INVALID_COORDINATES);
+    PyModule_AddIntConstant(m, "EXCEPTION_CODE_MISMATCH_BETWEEN_PARAMS_LENGHT", (long int) DSight::ExceptionCode::MISMATCH_BETWEEN_PARAMS_LENGHT);
+    PyModule_AddIntConstant(m, "EXCEPTION_CODE_MULTIPLE_CONTEXT", (long int) DSight::ExceptionCode::MULTIPLE_CONTEXT);
+    PyModule_AddIntConstant(m, "EXCEPTION_CODE_UNSUPPORTED_CONTEXT", (long int) DSight::ExceptionCode::UNSUPPORTED_CONTEXT);
+    
     return m;
 }
 

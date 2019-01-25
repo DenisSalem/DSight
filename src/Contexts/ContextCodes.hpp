@@ -2,12 +2,8 @@
 #define _CONTEXT_CODES_INCLUDED_
 
 namespace DSight {
-	enum ContextCode {
-		DSIGHT_CONTEXT_GLFW3 = 1,
-		DSIGHT_CONTEXT_GTK2_GL = 2,
-		DSIGHT_CONTEXT_GTK3_GL = 4,
-		DSIGHT_CONTEXT_SDL1_GL = 8,
-		DSIGHT_CONTEXT_SDL2_GL = 16
+	enum class ContextCode {
+		GLFW3 = 1
 	};
 }
 #endif

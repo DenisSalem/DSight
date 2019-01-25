@@ -1,4 +1,5 @@
 #include "PythonContextHandler.hpp"
+#include "PythonExceptionWrapper.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -12,17 +13,35 @@ ContextHandler_dealloc(PythonContextHandlerObject *self)
 }
 
 static PyObject *
-ContextHandler_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
+ContextHandler_init(PyTypeObject *type, PyObject *args, PyObject *kw)
 {
     PythonContextHandlerObject * self;
     self = (PythonContextHandlerObject *) type->tp_alloc(type, 0);
-    
+ 
+	int context_code, maj, min;
+	if (!PyArg_ParseTuple(args, "iii", &context_code, &maj, &min)) {
+		PyErr_BadArgument();
+		return NULL;
+	}
     
     if (self != NULL) {
 		try {
-			self->cpp_obj = new DSight::ContextHandler(DSight::DSIGHT_CONTEXT_GLFW3, 3, 3);
+			self->cpp_obj = new DSight::ContextHandler((DSight::ContextCode) context_code, maj, min);
 		} catch (std::bad_alloc&) {
-			// TODO
+			return PyErr_NoMemory();
+		}
+		catch (DSight::BaseException& e) {
+			//PyErr_Format(PyLong_FromLong(42), "%s", e.message.c_str());
+			//~ PyObject_SetAttrString(PythonBaseException, "code", PyLong_FromLong((long int) e.code));
+			//~ PyObject * code = PyObject_GetAttrString(PythonBaseException, "code");
+			//e = BaseException_init(PythonBaseException,
+			PyObject* py_e = Py_BuildValue("(s,i)", e.message.c_str(), e.code);
+			
+			Py_INCREF(py_e);
+			PyErr_SetObject(PythonExceptionWrapper, py_e);
+			Py_DECREF(py_e);
+			
+			return NULL;
 		}
     }
     
@@ -110,7 +129,7 @@ PyTypeObject PythonContextHandler = {
     0, //long tp_dictoffset
     0, //initproc tp_init
     0, //allocfunc tp_alloc
-    ContextHandler_new, //newfunc tp_new
+    ContextHandler_init, //newfunc tp_new
     
     // Low-level free-memory routine
     

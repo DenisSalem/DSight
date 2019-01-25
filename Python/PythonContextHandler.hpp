@@ -1,6 +1,7 @@
-#include <python3.6m/Python.h>
+#include "python.hpp"
 #include "Contexts/ContextHandler.hpp"
 #include "Contexts/ContextCodes.hpp"
+#include "Exceptions/BaseException.hpp"
 
 #ifdef __cplusplus
 extern "C" {

@@ -8,4 +8,4 @@ add_library(
 	Viewport STATIC
 	Viewport.cpp
 )
-target_link_libraries(Viewport DSightBaseException Charts)
+target_link_libraries(Viewport BaseException Charts)

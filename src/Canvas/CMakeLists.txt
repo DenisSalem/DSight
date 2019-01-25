@@ -8,4 +8,4 @@ add_library(
 	Canvas STATIC
 	Canvas.cpp
 )
-target_link_libraries(Canvas DSightBaseException Viewport)
+target_link_libraries(Canvas BaseException Viewport)
