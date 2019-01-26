@@ -34,16 +34,16 @@ namespace DSight {
 		canvas_instantiation_allowed = 1;
 		m_wrapper->CreateCanvas();
 		m_canvas.push_back(
-			Canvas(horizontal_subdivision, vertical_subdivision)
+			new Canvas(horizontal_subdivision, vertical_subdivision)
 		);
 		canvas_instantiation_allowed = 0;
-		return m_canvas.back();
+		return *(m_canvas.back());
 		
 	}
 	
 	ContextHandler::~ContextHandler() {
 		for (unsigned int i = 0; i< m_canvas.size(); i++) {
-			m_canvas.erase(m_canvas.begin() + i);
+			delete m_canvas[i];
 		}
 		
 		switch (m_context_code) {

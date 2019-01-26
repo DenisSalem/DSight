@@ -6,8 +6,8 @@ extern "C" {
 #endif
 
 PyObject * 
-AddCanvas(PythonContextHandlerObject *self, PyObject * args, PyObject * kw) {
-	return Canvas_C_Side_init(self->cpp_obj->AddCanvas(3,3));
+AddCanvas(PythonContextHandlerObject *self, PyObject * args) {
+	return Canvas_C_Side_init(&(self->cpp_obj->AddCanvas(3,3)));
 }
 
 static void
@@ -29,6 +29,7 @@ ContextHandler_dealloc(PythonContextHandlerObject *self)
 static PyObject *
 ContextHandler_init(PyTypeObject *type, PyObject *args, PyObject *kw)
 {
+	(void)kw;
     PythonContextHandlerObject * self;
     self = (PythonContextHandlerObject *) type->tp_alloc(type, 0);
  
@@ -58,7 +59,7 @@ static PyMethodDef ContextHandler_methods[] = {
     {"AddCanvas", (PyCFunction) AddCanvas, METH_NOARGS,
      "Add Canvas"
     },
-    {NULL}  /* Sentinel */
+    {0, 0, 0, 0}  /* Sentinel */
 };
 
 PyTypeObject PythonContextHandler = {

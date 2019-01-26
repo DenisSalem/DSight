@@ -20,7 +20,7 @@ namespace DSight {
 		private:
 			ContextCode m_context_code;
 			ContextBase * m_wrapper;
-			std::vector<Canvas> m_canvas;
+			std::vector<Canvas * > m_canvas;
 			static int context_count;
 			static bool canvas_instantiation_allowed;
 	};

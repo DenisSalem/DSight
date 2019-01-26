@@ -15,7 +15,7 @@ namespace DSight {
 			bool Overlap(Area new_area);
 			unsigned int m_horizontal_subdivision;
 			unsigned int m_vertical_subdivision;
-			std::vector<Viewport> m_viewports;
+			std::vector<Viewport * > m_viewports;
 	};
 }
 

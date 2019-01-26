@@ -63,11 +63,13 @@ bool PreventViewportOverlap(DSight::ContextCode context_code) {
 }
 
 int main() {
-	assert(DirectInstantiationForbidden());
+	//assert(DirectInstantiationForbidden());
 	#ifdef _USE_GLFW3_
 	assert(AddOutOfBoundViewport(DSight::ContextCode::GLFW3));
 	assert(PreventViewportOverlap(DSight::ContextCode::GLFW3));
+	printf("BEFORE DEALLOC\n");
 	assert(DoNotOverlap(DSight::ContextCode::GLFW3));
+	printf("AFTER DEALLOC\n");
 	#endif
 	return 0;
 }

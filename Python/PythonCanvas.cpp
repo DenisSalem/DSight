@@ -16,7 +16,6 @@ Canvas_dealloc(PythonCanvasObject *self)
 	}
 	
     Py_TYPE(self)->tp_free((PyObject *) self);
-	delete self->cpp_obj;
 	
     PyErr_Restore(error_type, error_value, error_traceback);
 }
@@ -24,6 +23,9 @@ Canvas_dealloc(PythonCanvasObject *self)
 static PyObject *
 Canvas_init(PyTypeObject *type, PyObject *args, PyObject *kw)
 {
+	(void) type;
+	(void) args;
+	(void) kw;
 	PyObject* py_e = Py_BuildValue("(s,i)", DSIGHT_MSG_INSTANTIATION_ERROR, (long int) DSight::ExceptionCode::INSTANTIATION_ERROR);
 	PyErr_SetObject(PythonExceptionWrapper, py_e);	
 	return NULL;
