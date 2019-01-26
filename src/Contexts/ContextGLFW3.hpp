@@ -2,7 +2,7 @@
 #include "ContextBase.hpp"
 
 namespace DSight {
-	class ContextGLFW3 : public ContextBase {
+	class ContextGLFW3 final: public ContextBase {
 		public:
 			ContextGLFW3(int maj, int min);
 			~ContextGLFW3();

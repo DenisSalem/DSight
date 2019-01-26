@@ -28,7 +28,7 @@ namespace DSight {
 		};
 		
 		// TEST IF NOT OUT OF BOUND
-		if (tl_x >= m_horizontal_subdivision || br_x > m_horizontal_subdivision || tl_y >= m_vertical_subdivision || br_y > m_vertical_subdivision) {
+		if (tl_x > m_horizontal_subdivision || br_x > m_horizontal_subdivision+1 || tl_y > m_vertical_subdivision || br_y > m_vertical_subdivision+1) {
 			throw DSight::BaseException(DSIGHT_MSG_INVALID_COORDINATES_OUT_OF_BOUNDS, ExceptionCode::INVALID_COORDINATES_OUT_OF_BOUNDS);
 		}
 		// TEST IF WELL FORMED

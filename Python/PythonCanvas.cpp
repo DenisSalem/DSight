@@ -8,6 +8,7 @@ extern "C" {
 static void
 Canvas_dealloc(PythonCanvasObject *self)
 {
+	printf("Dealloc canvas\n");
 	PyObject *error_type, *error_value, *error_traceback;
     PyErr_Fetch(&error_type, &error_value, &error_traceback);
     
@@ -138,11 +139,11 @@ PyTypeObject PythonCanvas = {
 };
 
 PyObject *
-Canvas_C_Side_init(DSight::Canvas * canvas)
+Canvas_C_Side_init(DSight::Canvas& canvas)
 {
 	PythonCanvasObject * self;
     self = (PythonCanvasObject *) PythonCanvas.tp_alloc(&PythonCanvas, 0);
-	self->cpp_obj = canvas;
+	self->cpp_obj = &canvas;
 	return (PyObject *) self;
 }
 

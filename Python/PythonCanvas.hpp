@@ -19,7 +19,7 @@ typedef struct {
 extern PyTypeObject PythonCanvas;
 
 PyObject *
-Canvas_C_Side_init(DSight::Canvas * canvas);
+Canvas_C_Side_init(DSight::Canvas& canvas);
 #ifdef __cplusplus
 }
 #endif

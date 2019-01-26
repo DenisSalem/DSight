@@ -7,7 +7,25 @@ extern "C" {
 
 PyObject * 
 AddCanvas(PythonContextHandlerObject *self, PyObject * args) {
-	return Canvas_C_Side_init(&(self->cpp_obj->AddCanvas(3,3)));
+	int horizontal_subdivision;
+	int vertical_subdivision;
+	if (!PyArg_ParseTuple(args, "ii", &horizontal_subdivision, &vertical_subdivision)) {
+		PyErr_BadArgument();
+		return NULL;
+	}
+	try {
+		self->m_py_canvas.push_back(
+			Canvas_C_Side_init(
+				self->cpp_obj->AddCanvas(horizontal_subdivision, vertical_subdivision)
+			)
+		);
+	}
+	catch (std::bad_alloc &e) {
+		return PyErr_NoMemory();
+	}
+	PyObject * canvas = self->m_py_canvas.back();
+	Py_INCREF(canvas);
+	return canvas;
 }
 
 static void
@@ -20,6 +38,10 @@ ContextHandler_dealloc(PythonContextHandlerObject *self)
         PyObject_ClearWeakRefs((PyObject *) self);
 	}
 	
+	for (unsigned int i = 0; i < self->m_py_canvas.size(); i++) {
+		Py_XDECREF(self->m_py_canvas[i]);
+	}
+	
     Py_TYPE(self)->tp_free((PyObject *) self);
 	delete self->cpp_obj;
 	
@@ -27,9 +49,9 @@ ContextHandler_dealloc(PythonContextHandlerObject *self)
 }
 
 static PyObject *
-ContextHandler_init(PyTypeObject *type, PyObject *args, PyObject *kw)
+ContextHandler_init(PyTypeObject *type, PyObject *args, PyObject * kw)
 {
-	(void)kw;
+	(void) kw;
     PythonContextHandlerObject * self;
     self = (PythonContextHandlerObject *) type->tp_alloc(type, 0);
  
@@ -44,8 +66,7 @@ ContextHandler_init(PyTypeObject *type, PyObject *args, PyObject *kw)
 			self->cpp_obj = new DSight::ContextHandler((DSight::ContextCode) context_code, maj, min);
 		} catch (std::bad_alloc&) {
 			return PyErr_NoMemory();
-		}
-		catch (DSight::BaseException& e) {
+		} catch (DSight::BaseException& e) {
 			PyObject* py_e = Py_BuildValue("(s,i)", e.message.c_str(), e.code);
 			PyErr_SetObject(PythonExceptionWrapper, py_e);			
 			return NULL;
@@ -56,7 +77,7 @@ ContextHandler_init(PyTypeObject *type, PyObject *args, PyObject *kw)
 }
 
 static PyMethodDef ContextHandler_methods[] = {
-    {"AddCanvas", (PyCFunction) AddCanvas, METH_NOARGS,
+    {"AddCanvas", (PyCFunction) AddCanvas, METH_VARARGS,
      "Add Canvas"
     },
     {0, 0, 0, 0}  /* Sentinel */

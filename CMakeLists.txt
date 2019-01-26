@@ -9,7 +9,6 @@ endif()
 set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 set(PACKAGE_VERSION "0.0.0")
-
 set(USE_GLFW3 "1")
 set(PYTHON_BINDING "1")
 

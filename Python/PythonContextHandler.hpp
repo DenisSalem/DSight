@@ -13,6 +13,7 @@ typedef struct {
     PyObject_HEAD
     PyObject *weakreflist;
     DSight::ContextHandler * cpp_obj;
+    std::vector<PyObject *> m_py_canvas;
 } PythonContextHandlerObject;
 
 extern PyTypeObject PythonContextHandler;

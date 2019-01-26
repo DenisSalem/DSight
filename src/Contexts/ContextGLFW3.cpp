@@ -4,7 +4,7 @@
 #include "ContextGLFW3.hpp"
 #include <iostream>
 
-namespace DSight {
+namespace DSight {	
 	ContextGLFW3::ContextGLFW3(int maj, int min) {
 		if (!glfwInit()) {
 			throw DSight::BaseException(DSIGHT_MSG_CONTEXT_INIT_FAILED, ExceptionCode::CONTEXT_INIT_FAILED);
