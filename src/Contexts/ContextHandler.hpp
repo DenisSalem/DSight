@@ -15,14 +15,14 @@ namespace DSight {
 			~ContextHandler();
 			
 			Canvas * AddCanvas(unsigned int horizontal_subdivision, unsigned int vertical_subdivision);
-			int static IsCanvasInstantiationAllowed();
+			bool static IsCanvasInstantiationAllowed();
 			
 		private:
 			ContextCode m_context_code;
 			ContextBase * m_wrapper;
 			std::vector<Canvas *> m_canvas;
 			static int context_count;
-			static int canvas_instantiation_allowed;
+			static bool canvas_instantiation_allowed;
 	};
 }
 

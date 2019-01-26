@@ -5,7 +5,7 @@
 
 namespace DSight {
 	int ContextHandler::context_count = 0;
-	int ContextHandler::canvas_instantiation_allowed = 0;
+	bool ContextHandler::canvas_instantiation_allowed = 0;
 
 	ContextHandler::ContextHandler(ContextCode context_code, int maj, int min) : m_context_code(context_code) {
 		if (ContextHandler::context_count > 0) {
@@ -26,7 +26,7 @@ namespace DSight {
 		}
 	}
 	
-	int ContextHandler::IsCanvasInstantiationAllowed() {
+	bool ContextHandler::IsCanvasInstantiationAllowed() {
 		return canvas_instantiation_allowed;
 	}
 	

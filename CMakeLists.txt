@@ -28,4 +28,6 @@ if(PYTHON_BINDING)
 endif()
 
 add_subdirectory(tests)
-add_test(ContextHandler tests/ContextHandler)
+add_test(ContextHandler tests/TestContextHandler)
+add_test(Canvas tests/TestCanvas)
+

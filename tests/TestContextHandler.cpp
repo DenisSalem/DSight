@@ -32,7 +32,6 @@ bool SingleContextHandlerInstance(DSight::ContextCode context_code) {
 		}
 		throw;
 	}
-	catch (...) {}
 	return 0;
 }
 
