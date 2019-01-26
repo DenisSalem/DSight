@@ -15,11 +15,11 @@ namespace DSight {
 	
 	Canvas::~Canvas() {
 		for (unsigned int i = 0; i < m_viewports.size(); i++) {
-			delete m_viewports[i];
+			m_viewports.erase(m_viewports.begin() + i);
 		} 
 	}
 	
-	Viewport * Canvas::AddViewport(unsigned int tl_x, unsigned int tl_y, unsigned int br_x, unsigned int br_y) {
+	Viewport& Canvas::AddViewport(unsigned int tl_x, unsigned int tl_y, unsigned int br_x, unsigned int br_y) {
 		Area area = {
 			tl_x,
 			tl_y,
@@ -40,7 +40,7 @@ namespace DSight {
 			throw DSight::BaseException(DSIGHT_MSG_INVALID_COORDINATES, ExceptionCode::INVALID_COORDINATES);
 		}
 		m_viewports.push_back(
-			new Viewport(area)
+			Viewport(area)
 		);
 		return m_viewports.back();
 	}
@@ -48,11 +48,11 @@ namespace DSight {
 	bool Canvas::Overlap(Area area) {
 		for (unsigned int i =0; i < m_viewports.size(); i++) {
 			// If one rectangle is on left side of other 
-			if (area.tl_x > m_viewports[i]->area.br_x || m_viewports[i]->area.tl_x > area.br_x) 
+			if (area.tl_x > m_viewports[i].area.br_x || m_viewports[i].area.tl_x > area.br_x) 
 				return false; 
   
 			// If one rectangle is above other 
-			if (area.tl_y > m_viewports[i]->area.br_y || m_viewports[i]->area.tl_y > area.br_y) 
+			if (area.tl_y > m_viewports[i].area.br_y || m_viewports[i].area.tl_y > area.br_y) 
 				return false; 
 		}
 		return true;

@@ -36,7 +36,9 @@ bool SingleContextHandlerInstance(DSight::ContextCode context_code) {
 }
 
 int main() {
+	#ifdef _USE_GLFW3_
 	assert(SingleContextHandlerInstance(DSight::ContextCode::GLFW3));
 	assert(DestructorResetStates(DSight::ContextCode::GLFW3));
+	#endif
 	return 0;
 }
