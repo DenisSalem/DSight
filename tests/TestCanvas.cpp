@@ -21,21 +21,53 @@ bool AddOutOfBoundViewport(DSight::ContextCode context_code) {
 	DSight::ContextHandler context(context_code, 3,3);
 	DSight::Canvas& canvas = context.AddCanvas(2,2);
 	try {
-		canvas.AddViewport(0,0,2,2);
+		canvas.AddViewport(0,0,3,3);
 	}
 	catch (DSight::BaseException &e) {
-		if (e.code == DSight::ExceptionCode::INVALID_COORDINATES) {
+		if (e.code == DSight::ExceptionCode::INVALID_COORDINATES_OUT_OF_BOUNDS) {
 			return 1;
 		}
 		throw;
 	}
 	return 0; 
 }
+bool DoNotOverlap(DSight::ContextCode context_code) {
+	DSight::ContextHandler context(context_code, 3,3);
+	DSight::Canvas& canvas = context.AddCanvas(4,4);
+	canvas.AddViewport(0,0,2,2);
+	try {
+		canvas.AddViewport(2,2,3,3);
+
+	} catch(DSight::BaseException &e) {
+			if (e.code == DSight::ExceptionCode::INVALID_COORDINATES_OVERLAP) {
+			return 0;
+		}
+		throw;	
+	}
+	return 1;
+}
+bool PreventViewportOverlap(DSight::ContextCode context_code) {
+	DSight::ContextHandler context(context_code, 3,3);
+	DSight::Canvas& canvas = context.AddCanvas(4,4);
+	canvas.AddViewport(0,0,2,2);
+	try {
+		canvas.AddViewport(1,1,3,3);
+
+	} catch(DSight::BaseException &e) {
+			if (e.code == DSight::ExceptionCode::INVALID_COORDINATES_OVERLAP) {
+			return 1;
+		}
+		throw;	
+	}
+	return 0;
+}
 
 int main() {
 	assert(DirectInstantiationForbidden());
 	#ifdef _USE_GLFW3_
 	assert(AddOutOfBoundViewport(DSight::ContextCode::GLFW3));
+	assert(PreventViewportOverlap(DSight::ContextCode::GLFW3));
+	assert(DoNotOverlap(DSight::ContextCode::GLFW3));
 	#endif
 	return 0;
 }

@@ -58,6 +58,8 @@ PyInit_dsight(void)
     PyModule_AddIntConstant(m, "EXCEPTION_CODE_CANVAS_CREATION_FAILED", (long int) DSight::ExceptionCode::CANVAS_CREATION_FAILED);
     PyModule_AddIntConstant(m, "EXCEPTION_CODE_CANVAS_DOESNT_EXISTS", (long int) DSight::ExceptionCode::CANVAS_DOESNT_EXISTS);
     PyModule_AddIntConstant(m, "EXCEPTION_CODE_CONTEXT_INIT_FAILED", (long int) DSight::ExceptionCode::CONTEXT_INIT_FAILED);
+    PyModule_AddIntConstant(m, "EXCEPTION_CODE_INVALID_COORDINATES_OUT_OUF_BOUNDS", (long int) DSight::ExceptionCode::INVALID_COORDINATES_OUT_OUF_BOUNDS);
+    PyModule_AddIntConstant(m, "EXCEPTION_CODE_INVALID_COORDINATES_OVERLAP", (long int) DSight::ExceptionCode::INVALID_COORDINATES_OVERLAP);
     PyModule_AddIntConstant(m, "EXCEPTION_CODE_INVALID_COORDINATES", (long int) DSight::ExceptionCode::INVALID_COORDINATES);
     PyModule_AddIntConstant(m, "EXCEPTION_CODE_MISMATCH_BETWEEN_PARAMS_LENGHT", (long int) DSight::ExceptionCode::MISMATCH_BETWEEN_PARAMS_LENGHT);
     PyModule_AddIntConstant(m, "EXCEPTION_CODE_MULTIPLE_CONTEXT", (long int) DSight::ExceptionCode::MULTIPLE_CONTEXT);
