@@ -39,12 +39,5 @@ bool SingleContextHandlerInstance(DSight::ContextCode context_code) {
 int main() {
 	assert(SingleContextHandlerInstance(DSight::ContextCode::GLFW3));
 	assert(DestructorResetStates(DSight::ContextCode::GLFW3));
-	
-	auto c = new DSight::ContextHandler(DSight::ContextCode::GLFW3, 3,3);
-	DSight::Canvas * canvas = c->AddCanvas(4,4);
-	std::cout << (long int) c << "\n";
-	delete c;
-	std::cout << (long int) c->AddCanvas(3,3) << "\n";
-	
 	return 0;
 }

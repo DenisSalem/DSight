@@ -24,7 +24,8 @@ Canvas_dealloc(PythonCanvasObject *self)
 static PyObject *
 Canvas_init(PyTypeObject *type, PyObject *args, PyObject *kw)
 {
-	PyErr_SetString(PythonExceptionWrapper, "Object must be returned by ContextHander.AddCanvas().");
+	PyObject* py_e = Py_BuildValue("(s,i)", DSIGHT_MSG_INSTANTIATION_ERROR, (long int) DSight::ExceptionCode::INSTANTIATION_ERROR);
+	PyErr_SetObject(PythonExceptionWrapper, py_e);	
 	return NULL;
 }
 

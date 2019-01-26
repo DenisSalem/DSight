@@ -1,6 +1,7 @@
 #include "Histogram.hpp"
 #include "../Exceptions/ExceptionCodes.hpp"
 #include "../Exceptions/BaseException.hpp"
+#include "../Exceptions/ExceptionMessages.hpp"
 
 namespace DSight {
 	void Histogram::SetPair(std::vector<std::pair<float, float>> * pair_values_frequencies) {
@@ -9,7 +10,7 @@ namespace DSight {
 	
 	void Histogram::SetPair(std::vector<float> * values, std::vector<float> * frequencies) {
 		if (values->size() != frequencies->size()) {
-			throw DSight::BaseException("Mismatch between parameters lenght.", DSight::ExceptionCode::MISMATCH_BETWEEN_PARAMS_LENGHT);
+			throw DSight::BaseException(DSIGHT_MSG_MISMATCH_BETWEEN_PARAMS_LENGHT, DSight::ExceptionCode::MISMATCH_BETWEEN_PARAMS_LENGHT);
 		}
 		m_pair_values_frequencies = new std::vector<std::pair<float, float>>();
 		for (unsigned int i = 0; i < values->size(); i++) {

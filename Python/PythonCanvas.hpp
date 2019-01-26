@@ -4,7 +4,7 @@
 #include "python.hpp"
 #include "Canvas/Canvas.hpp"
 #include "Contexts/ContextCodes.hpp"
-#include "Exceptions/BaseException.hpp"
+#include "Exceptions/ExceptionMessages.hpp"
 
 #ifdef __cplusplus
 extern "C" {

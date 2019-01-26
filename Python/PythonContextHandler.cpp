@@ -45,13 +45,8 @@ ContextHandler_init(PyTypeObject *type, PyObject *args, PyObject *kw)
 			return PyErr_NoMemory();
 		}
 		catch (DSight::BaseException& e) {
-			//PyErr_Format(PyLong_FromLong(42), "%s", e.message.c_str());
-			//~ PyObject_SetAttrString(PythonBaseException, "code", PyLong_FromLong((long int) e.code));
-			//~ PyObject * code = PyObject_GetAttrString(PythonBaseException, "code");
-			//e = BaseException_init(PythonBaseException,
 			PyObject* py_e = Py_BuildValue("(s,i)", e.message.c_str(), e.code);
-			PyErr_SetObject(PythonExceptionWrapper, py_e);
-			
+			PyErr_SetObject(PythonExceptionWrapper, py_e);			
 			return NULL;
 		}
     }

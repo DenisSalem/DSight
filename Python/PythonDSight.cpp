@@ -40,7 +40,7 @@ PyInit_dsight(void)
 
 	// DEFINES EXCEPTIONS
 		
-	PythonExceptionWrapper = PyErr_NewException("dsight.ExceptionPythonWrapper", NULL, NULL);
+	PythonExceptionWrapper = PyErr_NewException("dsight.PythonExceptionWrapper", NULL, NULL);
 	Py_INCREF(PythonExceptionWrapper);
     PyModule_AddObject(m, "PythonExceptionWrapper", PythonExceptionWrapper);
 
@@ -62,6 +62,7 @@ PyInit_dsight(void)
     PyModule_AddIntConstant(m, "EXCEPTION_CODE_MISMATCH_BETWEEN_PARAMS_LENGHT", (long int) DSight::ExceptionCode::MISMATCH_BETWEEN_PARAMS_LENGHT);
     PyModule_AddIntConstant(m, "EXCEPTION_CODE_MULTIPLE_CONTEXT", (long int) DSight::ExceptionCode::MULTIPLE_CONTEXT);
     PyModule_AddIntConstant(m, "EXCEPTION_CODE_UNSUPPORTED_CONTEXT", (long int) DSight::ExceptionCode::UNSUPPORTED_CONTEXT);
+    PyModule_AddIntConstant(m, "EXCEPTION_CODE_INSTANTIATION_ERROR", (long int) DSight::ExceptionCode::INSTANTIATION_ERROR);
     
     return m;
 }

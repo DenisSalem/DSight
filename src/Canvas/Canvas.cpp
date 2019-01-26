@@ -1,10 +1,17 @@
 #include "../Exceptions/ExceptionCodes.hpp"
+#include "../Exceptions/ExceptionMessages.hpp"
 #include "../Exceptions/BaseException.hpp"
+#include "../Contexts/ContextHandler.hpp"
 #include "Canvas.hpp"
 
 namespace DSight {
 	Canvas::Canvas(unsigned int horizontal_subdivision, unsigned int vertical_subdivision)
-	: m_horizontal_subdivision(horizontal_subdivision), m_vertical_subdivision(vertical_subdivision) {}
+	: m_horizontal_subdivision(horizontal_subdivision), m_vertical_subdivision(vertical_subdivision)
+	{
+		if (!ContextHandler::IsCanvasInstantiationAllowed()) {
+			throw BaseException(DSIGHT_MSG_INSTANTIATION_ERROR, DSight::ExceptionCode::INSTANTIATION_ERROR);
+		}
+	}
 	
 	Canvas::~Canvas() {
 		for (unsigned int i = 0; i < m_viewports.size(); i++) {
@@ -22,15 +29,15 @@ namespace DSight {
 		
 		// TEST IF NOT OUT OF BOUND
 		if (tl_x >= m_horizontal_subdivision || br_x >= m_horizontal_subdivision || tl_y >= m_vertical_subdivision || br_y >= m_vertical_subdivision) {
-			throw DSight::BaseException("Invalid Coordinates.", ExceptionCode::INVALID_COORDINATES);
+			throw DSight::BaseException(DSIGHT_MSG_INVALID_COORDINATES, ExceptionCode::INVALID_COORDINATES);
 		}
 		// TEST IF WELL FORMED
 		if(tl_x > br_x || tl_y > br_y) {
-			throw DSight::BaseException("Invalid Coordinates.", ExceptionCode::INVALID_COORDINATES);
+			throw DSight::BaseException(DSIGHT_MSG_INVALID_COORDINATES, ExceptionCode::INVALID_COORDINATES);
 		}
 
 		if (Overlap(area)) {
-			throw DSight::BaseException("Invalid Coordinates.", ExceptionCode::INVALID_COORDINATES);
+			throw DSight::BaseException(DSIGHT_MSG_INVALID_COORDINATES, ExceptionCode::INVALID_COORDINATES);
 		}
 		m_viewports.push_back(
 			new Viewport(area)
