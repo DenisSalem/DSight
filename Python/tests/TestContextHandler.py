@@ -11,8 +11,11 @@ def SingleContextHandlerInstance(context_code):
 		message, code = e.args
 		if code == dsight.EXCEPTION_CODE_MULTIPLE_CONTEXT:
 			return True
+		
+		raise e
 			
 	return False
+	
 def DestructorResetStates(context_code):
 	try:
 		c1 = dsight.ContextHandler(context_code,3,3)
@@ -27,5 +30,6 @@ def DestructorResetStates(context_code):
 		
 	return True
 	
-assert(SingleContextHandlerInstance(dsight.CONTEXT_CODE_GLFW3))
-assert(DestructorResetStates(dsight.CONTEXT_CODE_GLFW3));
+if "CONTEXT_CODE_GLFW3" in dir(dsight):
+	assert(SingleContextHandlerInstance(dsight.CONTEXT_CODE_GLFW3))
+	assert(DestructorResetStates(dsight.CONTEXT_CODE_GLFW3));

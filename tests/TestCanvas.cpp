@@ -31,12 +31,13 @@ bool AddOutOfBoundViewport(DSight::ContextCode context_code) {
 	}
 	return 0; 
 }
+
 bool DoNotOverlap(DSight::ContextCode context_code) {
 	DSight::ContextHandler context(context_code, 3,3);
 	DSight::Canvas& canvas = context.AddCanvas(4,4);
 	canvas.AddViewport(0,0,2,2);
 	try {
-		canvas.AddViewport(2,2,3,3);
+		canvas.AddViewport(2,2,5,5);
 
 	} catch(DSight::BaseException &e) {
 			if (e.code == DSight::ExceptionCode::INVALID_COORDINATES_OVERLAP) {

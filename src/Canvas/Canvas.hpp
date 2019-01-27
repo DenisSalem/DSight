@@ -16,6 +16,7 @@ namespace DSight {
 			unsigned int m_horizontal_subdivision;
 			unsigned int m_vertical_subdivision;
 			std::vector<Viewport * > m_viewports;
+			static bool viewport_instantiation_allowed;
 	};
 }
 

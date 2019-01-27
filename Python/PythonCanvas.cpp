@@ -5,6 +5,31 @@
 extern "C" {
 #endif
 
+PyObject * 
+AddViewport(PythonCanvasObject *self, PyObject * args) {
+	int tl_x;
+	int tl_y;
+	int br_x;
+	int br_y;
+	if (!PyArg_ParseTuple(args, "iiii", &tl_x, &tl_y, &br_x, &br_y)) {
+		PyErr_BadArgument();
+		return NULL;
+	}
+	try {
+		self->m_py_viewport.push_back(
+			Viewport_C_Side_init(
+				self->cpp_obj->AddViewport(tl_x, tl_y, br_x, br_y)
+			)
+		);
+	}
+	catch (std::bad_alloc &e) {
+		return PyErr_NoMemory();
+	}
+	PyObject * viewport = self->m_py_canvas.back();
+	Py_INCREF(canvas);
+	return canvas;
+}
+
 static void
 Canvas_dealloc(PythonCanvasObject *self)
 {
@@ -31,6 +56,13 @@ Canvas_init(PyTypeObject *type, PyObject *args, PyObject *kw)
 	PyErr_SetObject(PythonExceptionWrapper, py_e);	
 	return NULL;
 }
+
+static PyMethodDef Canvas_methods[] = {
+    {"AddViewport", (PyCFunction) AddCanvas, METH_VARARGS,
+     "Add Viewport."
+    },
+    {0, 0, 0, 0}  /* Sentinel */
+};
 
 PyTypeObject PythonCanvas = {
     PyVarObject_HEAD_INIT(NULL, 0)
@@ -75,7 +107,7 @@ PyTypeObject PythonCanvas = {
     Py_TPFLAGS_DEFAULT, //long tp_flags
 
 	// Documentation string
-    "Canvas", //char *tp_doc
+    "Canvas.", //char *tp_doc
 
     // Assigned meaning in release 2.0
     // call function for all accessible objects

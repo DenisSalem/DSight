@@ -78,7 +78,7 @@ ContextHandler_init(PyTypeObject *type, PyObject *args, PyObject * kw)
 
 static PyMethodDef ContextHandler_methods[] = {
     {"AddCanvas", (PyCFunction) AddCanvas, METH_VARARGS,
-     "Add Canvas"
+     "Add Canvas."
     },
     {0, 0, 0, 0}  /* Sentinel */
 };
@@ -126,7 +126,7 @@ PyTypeObject PythonContextHandler = {
     Py_TPFLAGS_DEFAULT, //long tp_flags
 
 	// Documentation string
-    "Context Handler", //char *tp_doc
+    "Context Handler.", //char *tp_doc
 
     // Assigned meaning in release 2.0
     // call function for all accessible objects

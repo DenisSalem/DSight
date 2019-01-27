@@ -5,6 +5,8 @@
 #include "Canvas.hpp"
 
 namespace DSight {
+	bool Canvas::viewport_instantiation_allowed = 0;
+
 	Canvas::Canvas(unsigned int horizontal_subdivision, unsigned int vertical_subdivision)
 	: m_horizontal_subdivision(horizontal_subdivision), m_vertical_subdivision(vertical_subdivision)
 	{
@@ -17,6 +19,7 @@ namespace DSight {
 		for (unsigned int i = 0; i < m_viewports.size(); i++) {
 			delete m_viewports[i];
 		} 
+		Canvas::viewport_instantiation_allowed = 0;
 	}
 	
 	Viewport& Canvas::AddViewport(unsigned int tl_x, unsigned int tl_y, unsigned int br_x, unsigned int br_y) {
@@ -39,9 +42,11 @@ namespace DSight {
 		if (Overlap(area)) {
 			throw DSight::BaseException(DSIGHT_MSG_INVALID_COORDINATES_OVERLAP, ExceptionCode::INVALID_COORDINATES_OVERLAP);
 		}
+		Canvas::viewport_instantiation_allowed = 1;
 		m_viewports.push_back(
 			new Viewport(area)
 		);
+		Canvas::viewport_instantiation_allowed = 0;
 		return *(m_viewports.back());
 	}
 	

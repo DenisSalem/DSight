@@ -54,7 +54,10 @@ PyInit_dsight(void)
 
 	// DEFINES CONSTANTS
   
+	#ifdef _USE_GLFW3_
     PyModule_AddIntConstant(m, "CONTEXT_CODE_GLFW3", (long int) DSight::ContextCode::GLFW3);
+	#endif
+	
     PyModule_AddIntConstant(m, "EXCEPTION_CODE_CANVAS_CREATION_FAILED", (long int) DSight::ExceptionCode::CANVAS_CREATION_FAILED);
     PyModule_AddIntConstant(m, "EXCEPTION_CODE_CANVAS_DOESNT_EXISTS", (long int) DSight::ExceptionCode::CANVAS_DOESNT_EXISTS);
     PyModule_AddIntConstant(m, "EXCEPTION_CODE_CONTEXT_INIT_FAILED", (long int) DSight::ExceptionCode::CONTEXT_INIT_FAILED);
