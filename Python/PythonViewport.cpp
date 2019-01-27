@@ -1,39 +1,13 @@
+#include "PythonViewport.hpp"
 #include "PythonExceptionWrapper.hpp"
-#include "PythonCanvas.hpp"
 #include "Macros.hpp"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-PyObject * 
-AddViewport(PythonCanvasObject *self, PyObject * args) {
-	int tl_x;
-	int tl_y;
-	int br_x;
-	int br_y;
-	
-	PyDSightParseTuple(args, "iiii", &tl_x, &tl_y, &br_x, &br_y)
-	
-	try {
-		self->m_py_viewport.push_back(
-			Viewport_C_Side_init(
-				self->cpp_obj->AddViewport(tl_x, tl_y, br_x, br_y)
-			)
-		);
-	}
-	catch (std::bad_alloc &e) {
-		return PyErr_NoMemory();
-	}
-	DSIGHT_CATCH_BASE_EXCEPTION()
-	
-	PyObject * viewport = self->m_py_viewport.back();
-	Py_INCREF(viewport);
-	return viewport;
-}
-
 static void
-Canvas_dealloc(PythonCanvasObject *self)
+Viewport_dealloc(PythonViewportObject *self)
 {
 	PyObject *error_type, *error_value, *error_traceback;
     PyErr_Fetch(&error_type, &error_value, &error_traceback);
@@ -41,36 +15,34 @@ Canvas_dealloc(PythonCanvasObject *self)
 	if (self->weakreflist != NULL) {
         PyObject_ClearWeakRefs((PyObject *) self);
 	}
-	
+		
     Py_TYPE(self)->tp_free((PyObject *) self);
+	delete self->cpp_obj;
 	
     PyErr_Restore(error_type, error_value, error_traceback);
 }
 
-DEFINE_DEFAULT_DSIGHT_PY_OBJECT_INIT(Canvas)
+DEFINE_DEFAULT_DSIGHT_PY_OBJECT_INIT(Viewport)
 
-static PyMethodDef Canvas_methods[] = {
-    {"AddViewport", (PyCFunction) AddViewport, METH_VARARGS,
-     "Add Viewport."
-    },
+static PyMethodDef Viewport_methods[] = {
     {0, 0, 0, 0}  /* Sentinel */
 };
 
-PyTypeObject PythonCanvas = {
+PyTypeObject PythonViewport = {
     PyVarObject_HEAD_INIT(NULL, 0)
     
     // For printing, in format "<module>.<name>"
     
-    "dsight.Canvas", // char *tp_name 
+    "dsight.Viewport", // char *tp_name 
     
     // For allocation
 	
-	sizeof(PythonCanvasObject), //int tp_basicsize 
+	sizeof(PythonViewport), //int tp_basicsize 
 	0, //int tp_itemsize
 	
 	// Methods to implement standard operations
     
-    (destructor) Canvas_dealloc, //destructor tp_dealloc
+    (destructor) Viewport_dealloc, //destructor tp_dealloc
     0, //printfunc tp_print
     0, //getattrfunc tp_getattr
     0, //etattrfunc tp_setattr
@@ -99,7 +71,7 @@ PyTypeObject PythonCanvas = {
     Py_TPFLAGS_DEFAULT, //long tp_flags
 
 	// Documentation string
-    "Context's Canvas.", //char *tp_doc
+    "Canvas's Viewport.", //char *tp_doc
 
     // Assigned meaning in release 2.0
     // call function for all accessible objects
@@ -117,7 +89,7 @@ PyTypeObject PythonCanvas = {
 
     // weak reference enabler
     
-    offsetof(PythonCanvasObject, weakreflist), //long tp_weaklistoffset
+    offsetof(PythonViewportObject, weakreflist), //long tp_weaklistoffset
 
     // Added in release 2.2
     // Iterators
@@ -127,7 +99,7 @@ PyTypeObject PythonCanvas = {
 
     // Attribute descriptor and subclassing stuff
     
-    Canvas_methods, //struct PyMethodDef *tp_methods
+    Viewport_methods, //struct PyMethodDef *tp_methods
     0, //struct PyMemberDef *tp_members
     0, //struct PyGetSetDef *tp_getset
     0, //struct _typeobject *tp_base
@@ -137,7 +109,7 @@ PyTypeObject PythonCanvas = {
     0, //long tp_dictoffset
     0, //initproc tp_init
     0, //allocfunc tp_alloc
-    Canvas_init, //newfunc tp_new
+    Viewport_init, //newfunc tp_new
     
     // Low-level free-memory routine
     
@@ -162,7 +134,7 @@ PyTypeObject PythonCanvas = {
     0, //destructor tp_finalize
 };
 
-DEFINE_DEFAULT_DSIGHT_PY_OBJECT_C_SIDE_INIT(Canvas, DSight::Canvas&, canvas)
+DEFINE_DEFAULT_DSIGHT_PY_OBJECT_C_SIDE_INIT(Viewport, DSight::Viewport&, viewport)
 
 #ifdef __cplusplus
 }

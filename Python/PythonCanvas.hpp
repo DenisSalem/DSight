@@ -5,6 +5,7 @@
 #include "Canvas/Canvas.hpp"
 #include "Contexts/ContextCodes.hpp"
 #include "Exceptions/ExceptionMessages.hpp"
+#include "PythonViewport.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -14,6 +15,7 @@ typedef struct {
     PyObject_HEAD
     PyObject *weakreflist;
     DSight::Canvas * cpp_obj;
+    std::vector<PyObject *> m_py_viewport;
 } PythonCanvasObject;
 
 extern PyTypeObject PythonCanvas;

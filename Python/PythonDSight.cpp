@@ -5,6 +5,7 @@
 #include "PythonCanvas.hpp"
 #include "PythonContextHandler.hpp"
 #include "PythonExceptionWrapper.hpp"
+#include "Macros.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -32,7 +33,10 @@ PyInit_dsight(void)
         
     if (PyType_Ready(&PythonCanvas) < 0)
         return NULL;
-                       
+
+    if (PyType_Ready(&PythonViewport) < 0)
+        return NULL;
+                               
     m = PyModule_Create(&dsight);
     if (m == NULL) {
         return NULL;
@@ -46,12 +50,11 @@ PyInit_dsight(void)
 
 	// DEFINES PUBLIC OBJECTS
 
-    Py_INCREF(&PythonContextHandler);
-    PyModule_AddObject(m, "ContextHandler", (PyObject *) &PythonContextHandler);
-    
-    Py_INCREF(&PythonCanvas);
-    PyModule_AddObject(m, "Canvas", (PyObject *) &PythonCanvas);
+	DSIGHT_ADD_OBJECT_TO_MODULE(ContextHandler)
+	DSIGHT_ADD_OBJECT_TO_MODULE(Canvas)
+	DSIGHT_ADD_OBJECT_TO_MODULE(Viewport)
 
+    
 	// DEFINES CONSTANTS
   
 	#ifdef _USE_GLFW3_
@@ -61,7 +64,7 @@ PyInit_dsight(void)
     PyModule_AddIntConstant(m, "EXCEPTION_CODE_CANVAS_CREATION_FAILED", (long int) DSight::ExceptionCode::CANVAS_CREATION_FAILED);
     PyModule_AddIntConstant(m, "EXCEPTION_CODE_CANVAS_DOESNT_EXISTS", (long int) DSight::ExceptionCode::CANVAS_DOESNT_EXISTS);
     PyModule_AddIntConstant(m, "EXCEPTION_CODE_CONTEXT_INIT_FAILED", (long int) DSight::ExceptionCode::CONTEXT_INIT_FAILED);
-    PyModule_AddIntConstant(m, "EXCEPTION_CODE_INVALID_COORDINATES_OUT_OUF_BOUNDS", (long int) DSight::ExceptionCode::INVALID_COORDINATES_OUT_OF_BOUNDS);
+    PyModule_AddIntConstant(m, "EXCEPTION_CODE_INVALID_COORDINATES_OUT_OF_BOUNDS", (long int) DSight::ExceptionCode::INVALID_COORDINATES_OUT_OF_BOUNDS);
     PyModule_AddIntConstant(m, "EXCEPTION_CODE_INVALID_COORDINATES_OVERLAP", (long int) DSight::ExceptionCode::INVALID_COORDINATES_OVERLAP);
     PyModule_AddIntConstant(m, "EXCEPTION_CODE_INVALID_COORDINATES", (long int) DSight::ExceptionCode::INVALID_COORDINATES);
     PyModule_AddIntConstant(m, "EXCEPTION_CODE_MISMATCH_BETWEEN_PARAMS_LENGHT", (long int) DSight::ExceptionCode::MISMATCH_BETWEEN_PARAMS_LENGHT);

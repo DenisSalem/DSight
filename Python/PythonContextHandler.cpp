@@ -1,5 +1,6 @@
 #include "PythonContextHandler.hpp"
 #include "PythonExceptionWrapper.hpp"
+#include "Macros.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -66,11 +67,8 @@ ContextHandler_init(PyTypeObject *type, PyObject *args, PyObject * kw)
 			self->cpp_obj = new DSight::ContextHandler((DSight::ContextCode) context_code, maj, min);
 		} catch (std::bad_alloc&) {
 			return PyErr_NoMemory();
-		} catch (DSight::BaseException& e) {
-			PyObject* py_e = Py_BuildValue("(s,i)", e.message.c_str(), e.code);
-			PyErr_SetObject(PythonExceptionWrapper, py_e);			
-			return NULL;
 		}
+		DSIGHT_CATCH_BASE_EXCEPTION()
     }
     
     return (PyObject *) self;
