@@ -13,4 +13,5 @@ TODO | Add DSight::AllocationException, Inherits from DSight::BaseException.
 TODO | Raise DSight::AllocationException when 'new' usage failed.
 TODO | Raise exception for every XXX_C_Side_init failure (returning NULL pointer).
 TODO | Write documentation.
+BUG  | Investigate why exception stop to triggers after one throwing.
 
