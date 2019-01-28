@@ -30,6 +30,19 @@ def DestructorResetStates(context_code):
 		
 	return True
 	
+def RemoveCanvas(context_code):
+	context = dsight.ContextHandler(context_code, 3, 3)
+	canvas = context.AddCanvas(0, 0)
+	return context.RemoveCanvas(canvas)
+	
+def CannotRemoveCanvasViewportTwice(context_code):
+	context = dsight.ContextHandler(context_code, 3, 3)
+	canvas = context.AddCanvas(0, 0)
+	context.RemoveCanvas(canvas)
+	return not context.RemoveCanvas(canvas)
+	
 if "CONTEXT_CODE_GLFW3" in dir(dsight):
 	assert(SingleContextHandlerInstance(dsight.CONTEXT_CODE_GLFW3))
 	assert(DestructorResetStates(dsight.CONTEXT_CODE_GLFW3));
+	assert(RemoveCanvas(dsight.CONTEXT_CODE_GLFW3));
+	assert(CannotRemoveCanvasViewportTwice(dsight.CONTEXT_CODE_GLFW3));

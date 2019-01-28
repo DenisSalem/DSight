@@ -15,6 +15,7 @@ namespace DSight {
 			~ContextHandler();
 			
 			Canvas& AddCanvas(unsigned int horizontal_subdivision, unsigned int vertical_subdivision);
+			bool RemoveCanvas(Canvas& canvas);
 			bool static IsCanvasInstantiationAllowed();
 			long int static GetCurrentContextIdentifier();
 			

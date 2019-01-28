@@ -52,6 +52,17 @@ namespace DSight {
 		
 	}
 	
+	bool ContextHandler::RemoveCanvas(Canvas& canvas) {
+		for (unsigned int i = 0; i < m_canvas.size(); i++) {
+			if ( *(m_canvas[i]) == canvas) {
+				delete m_canvas[i];
+				m_canvas.erase(m_canvas.begin() + i);
+				return 1;
+			}
+		}
+		return 0;
+	}
+	
 	ContextHandler::~ContextHandler() {
 		for (unsigned int i = 0; i< m_canvas.size(); i++) {
 			delete m_canvas[i];

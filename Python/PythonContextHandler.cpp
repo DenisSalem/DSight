@@ -29,6 +29,23 @@ AddCanvas(PythonContextHandlerObject *self, PyObject * args) {
 	return (PyObject*) canvas;
 }
 
+PyObject * 
+RemoveCanvas(PythonContextHandlerObject *self, PyObject * args) {
+	PythonCanvasObject * canvas = NULL;
+	
+	DSIGHT_PY_PARSE_TUPLE(args, "O!", &PythonCanvas, &canvas)
+
+	for(unsigned int i = 0; i < self->m_py_canvas.size(); i++) {
+		if (self->m_py_canvas[i]->cpp_obj == canvas->cpp_obj) {
+			self->m_py_canvas.erase(self->m_py_canvas.begin() + i);
+			bool ret = self->cpp_obj->RemoveCanvas( *(canvas->cpp_obj) );
+			Py_DECREF(canvas);
+			return PyBool_FromLong(ret);
+		}
+	}
+	return PyBool_FromLong(0);
+}
+
 static void
 ContextHandler_dealloc(PythonContextHandlerObject *self)
 {
@@ -75,9 +92,8 @@ ContextHandler_init(PyTypeObject *type, PyObject *args, PyObject * kw)
 }
 
 static PyMethodDef ContextHandler_methods[] = {
-    {"AddCanvas", (PyCFunction) AddCanvas, METH_VARARGS,
-     "Add Canvas."
-    },
+    {"AddCanvas", (PyCFunction) AddCanvas, METH_VARARGS,"Add Canvas."},
+    {"RemoveCanvas", (PyCFunction) RemoveCanvas, METH_VARARGS,"Remove Canvas."},
     {0, 0, 0, 0}  /* Sentinel */
 };
 
