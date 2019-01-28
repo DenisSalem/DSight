@@ -64,6 +64,24 @@ def PreventViewportOverlap(context_code):
 	
 	return 0
 
+def PreventViewportOverlapWithMultipleViewports(context_code):
+	context = dsight.ContextHandler(context_code, 3,3)
+	canvas = context.AddCanvas(1,1)
+	canvas.AddViewport(0,0,1,1)
+	canvas.AddViewport(1,0,2,1)
+	canvas.AddViewport(0,1,1,2)
+	canvas.AddViewport(1,1,2,2)
+	try:
+		canvas.AddViewport(0,0,2,2)
+
+	except dsight.PythonExceptionWrapper as e:
+		message, code = e.args
+		if code == dsight.EXCEPTION_CODE_INVALID_COORDINATES_OVERLAP:
+			return 1
+		
+		raise e
+	
+	return 0
 
 def PreventViewportOverlapFromZeroZeroToOneOne(context_code):
 	context = dsight.ContextHandler(context_code, 3,3)
@@ -97,11 +115,29 @@ def ZeroSubdivision(context_code):
 	
 	return 1
 
+def RemoveViewport(context_code):
+	context = dsight.ContextHandler(context_code, 3, 3)
+	canvas = context.AddCanvas(0, 0)
+	viewport = canvas.AddViewport(0, 0, 1, 1)
+	return canvas.RemoveViewport(viewport)
+	
+def CannotRemoveViewportTwice(context_code):
+	context = dsight.ContextHandler(context_code, 3, 3)
+	canvas = context.AddCanvas(0, 0)
+	viewport = canvas.AddViewport(0, 0, 1, 1)
+	canvas.RemoveViewport(viewport)
+	return not canvas.RemoveViewport(viewport)
+
 assert(DirectInstantiationForbidden())
 if "CONTEXT_CODE_GLFW3" in dir(dsight):
 	assert(AddOutOfBoundViewport(dsight.CONTEXT_CODE_GLFW3))
 	assert(DoNotOverlap(dsight.CONTEXT_CODE_GLFW3))
 	assert(PreventViewportOverlap(dsight.CONTEXT_CODE_GLFW3))
+	assert(PreventViewportOverlapWithMultipleViewports(dsight.CONTEXT_CODE_GLFW3))
 	assert(PreventViewportOverlapFromZeroZeroToOneOne(dsight.CONTEXT_CODE_GLFW3))
 	assert(ZeroSubdivision(dsight.CONTEXT_CODE_GLFW3))
+	assert(RemoveViewport(dsight.CONTEXT_CODE_GLFW3))
+	assert(CannotRemoveViewportTwice(dsight.CONTEXT_CODE_GLFW3))
+
+
 	

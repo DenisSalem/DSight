@@ -1,5 +1,5 @@
-#ifndef DSIGHT_MACROS_HPP_INCLUDED
-#define DSIGHT_MACROS_HPP_INCLUDED
+#ifndef DSIGHT_PY_MACROS_HPP_INCLUDED
+#define DSIGHT_PY_MACROS_HPP_INCLUDED
 
 #define DSIGHT_CATCH_BASE_EXCEPTION() \
 catch (DSight::BaseException& e) { \
@@ -12,13 +12,13 @@ catch (DSight::BaseException& e) { \
     Py_INCREF(&Python ## NAME);\
     PyModule_AddObject(m, # NAME, (PyObject *) &Python ## NAME);
 
-#define PyDSightParseTuple(ARGS, FORMAT, ...) \
+#define DSIGHT_PY_PARSE_TUPLE(ARGS, FORMAT, ...) \
 if (!PyArg_ParseTuple(ARGS, FORMAT , __VA_ARGS__)) { \
 	PyErr_BadArgument(); \
 	return NULL; \
 }
 
-#define DEFINE_DEFAULT_DSIGHT_PY_OBJECT_INIT(NAME) \
+#define DSIGHT_DEFINE_DEFAULT_PY_OBJECT_INIT(NAME) \
 static PyObject * \
 NAME ## _init(PyTypeObject *type, PyObject *args, PyObject * kw) \
 { \
@@ -30,7 +30,7 @@ NAME ## _init(PyTypeObject *type, PyObject *args, PyObject * kw) \
 	return NULL; \
 }
 
-#define DEFINE_DEFAULT_DSIGHT_PY_OBJECT_C_SIDE_INIT(NAME, ARG_TYPE, ARG) \
+#define DSIGHT_DEFINE_DEFAULT_PY_OBJECT_C_SIDE_INIT(NAME, ARG_TYPE, ARG) \
 PyObject * \
 NAME ## _C_Side_init(ARG_TYPE ARG) \
 { \

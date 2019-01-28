@@ -15,7 +15,7 @@ typedef struct {
     PyObject_HEAD
     PyObject *weakreflist;
     DSight::Canvas * cpp_obj;
-    std::vector<PyObject *> m_py_viewport;
+    std::vector<PythonViewportObject * > m_py_viewports;
 } PythonCanvasObject;
 
 extern PyTypeObject PythonCanvas;

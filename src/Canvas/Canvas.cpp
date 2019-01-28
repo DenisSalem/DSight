@@ -1,3 +1,5 @@
+#include <sys/time.h>
+#include "../Macros.hpp"
 #include "../Exceptions/ExceptionCodes.hpp"
 #include "../Exceptions/ExceptionMessages.hpp"
 #include "../Exceptions/BaseException.hpp"
@@ -13,6 +15,7 @@ namespace DSight {
 		if (!ContextHandler::IsCanvasInstantiationAllowed()) {
 			throw BaseException(DSIGHT_MSG_INSTANTIATION_ERROR, DSight::ExceptionCode::INSTANTIATION_ERROR);
 		}
+		DSIGHT_SET_UNIQUE_IDENTIFIER(m_identifier);
 	}
 	
 	Canvas::~Canvas() {
@@ -50,19 +53,41 @@ namespace DSight {
 		return *(m_viewports.back());
 	}
 	
+	bool Canvas::RemoveViewport(Viewport& viewport) {
+		for (unsigned int i = 0; i < m_viewports.size(); i++) {
+			if ( *(m_viewports[i]) == viewport) {
+				delete m_viewports[i];
+				m_viewports.erase(m_viewports.begin() + i);
+				return 1;
+			}
+		}
+		return 0;
+	}
+
 	bool Canvas::Overlap(Area area) {
 		if (m_viewports.size() == 0) {
 			return 0;
 		}
+		bool overlap;
 		for (unsigned int i =0; i < m_viewports.size(); i++) {
+			overlap = true;
 			// If one rectangle is on left side of other 
 			if (area.tl_x >= m_viewports[i]->area.br_x || m_viewports[i]->area.tl_x >= area.br_x) 
-				return 0; 
+				overlap = false; 
   
 			// If one rectangle is above other 
 			if (area.tl_y >= m_viewports[i]->area.br_y || m_viewports[i]->area.tl_y >= area.br_y) 
-				return 0;
+				overlap = false;
 			}
-		return 1;
+			
+			if (overlap) {
+				return true;
+			}
+			
+		return 0;
+	}
+	
+	bool operator== (const Canvas &c1, const Canvas &c2) {
+		return c1.m_identifier == c2.m_identifier;
 	}
 }

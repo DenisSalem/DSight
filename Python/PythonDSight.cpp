@@ -2,9 +2,11 @@
 #include "Contexts/ContextCodes.hpp"
 #include "Exceptions/ExceptionCodes.hpp"
 
+#include "PythonViewport.hpp"
 #include "PythonCanvas.hpp"
 #include "PythonContextHandler.hpp"
 #include "PythonExceptionWrapper.hpp"
+
 #include "Macros.hpp"
 
 #ifdef __cplusplus

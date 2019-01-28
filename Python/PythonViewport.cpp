@@ -16,13 +16,11 @@ Viewport_dealloc(PythonViewportObject *self)
         PyObject_ClearWeakRefs((PyObject *) self);
 	}
 		
-    Py_TYPE(self)->tp_free((PyObject *) self);
-	delete self->cpp_obj;
-	
+    Py_TYPE(self)->tp_free((PyObject *) self);	
     PyErr_Restore(error_type, error_value, error_traceback);
 }
 
-DEFINE_DEFAULT_DSIGHT_PY_OBJECT_INIT(Viewport)
+DSIGHT_DEFINE_DEFAULT_PY_OBJECT_INIT(Viewport)
 
 static PyMethodDef Viewport_methods[] = {
     {0, 0, 0, 0}  /* Sentinel */
@@ -134,7 +132,7 @@ PyTypeObject PythonViewport = {
     0, //destructor tp_finalize
 };
 
-DEFINE_DEFAULT_DSIGHT_PY_OBJECT_C_SIDE_INIT(Viewport, DSight::Viewport&, viewport)
+DSIGHT_DEFINE_DEFAULT_PY_OBJECT_C_SIDE_INIT(Viewport, DSight::Viewport&, viewport)
 
 #ifdef __cplusplus
 }

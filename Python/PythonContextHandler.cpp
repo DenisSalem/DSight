@@ -16,7 +16,7 @@ AddCanvas(PythonContextHandlerObject *self, PyObject * args) {
 	}
 	try {
 		self->m_py_canvas.push_back(
-			Canvas_C_Side_init(
+			(PythonCanvasObject *) Canvas_C_Side_init(
 				self->cpp_obj->AddCanvas(horizontal_subdivision, vertical_subdivision)
 			)
 		);
@@ -24,9 +24,9 @@ AddCanvas(PythonContextHandlerObject *self, PyObject * args) {
 	catch (std::bad_alloc &e) {
 		return PyErr_NoMemory();
 	}
-	PyObject * canvas = self->m_py_canvas.back();
+	PythonCanvasObject * canvas = self->m_py_canvas.back();
 	Py_INCREF(canvas);
-	return canvas;
+	return (PyObject*) canvas;
 }
 
 static void
