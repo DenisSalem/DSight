@@ -16,8 +16,13 @@ namespace DSight {
 	}
 	
 	void ContextGLFW3::CreateCanvas(const char * canvas_name) {
-		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); 
-		m_windows.push_back(glfwCreateWindow(m_default_width, m_default_height, canvas_name, NULL, NULL));
+		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+		if (canvas_name) {
+			m_windows.push_back(glfwCreateWindow(m_default_width, m_default_height, canvas_name, NULL, NULL));
+		}
+		else {
+			m_windows.push_back(glfwCreateWindow(m_default_width, m_default_height, "", NULL, NULL));
+		}
 		if (!m_windows.back()) {
 			glfwTerminate();
 			throw DSight::BaseException(DSIGHT_MSG_CANVAS_CREATION_FAILED, ExceptionCode::CANVAS_CREATION_FAILED);

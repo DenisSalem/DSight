@@ -68,7 +68,7 @@ namespace DSight {
 		if (m_viewports.size() == 0) {
 			return 0;
 		}
-		bool overlap;
+		bool overlap = true;
 		for (unsigned int i =0; i < m_viewports.size(); i++) {
 			overlap = true;
 			// If one rectangle is on left side of other 
