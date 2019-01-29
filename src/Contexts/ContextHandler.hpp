@@ -18,6 +18,7 @@ namespace DSight {
 			bool RemoveCanvas(Canvas& canvas);
 			bool static IsCanvasInstantiationAllowed();
 			long int static GetCurrentContextIdentifier();
+			ContextHandler& SetDefaultCanvasSize(int default_width, int default_height);
 			
 		private:
 			ContextCode m_context_code;
@@ -25,6 +26,8 @@ namespace DSight {
 			std::vector<Canvas * > m_canvas;
 			static int context_count;
 			static long int m_identifier;
+			int m_default_width;
+			int m_default_height;
 			static bool canvas_instantiation_allowed;
 	};
 }

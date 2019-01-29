@@ -10,15 +10,18 @@ PyObject *
 AddCanvas(PythonContextHandlerObject *self, PyObject * args) {
 	int horizontal_subdivision;
 	int vertical_subdivision;
-	const char * canvas_name;
-	if (!PyArg_ParseTuple(args, "iis", &horizontal_subdivision, &vertical_subdivision, &canvas_name)) {
-		PyErr_BadArgument();
-		return NULL;
+	const char * canvas_name = NULL;
+	DSIGHT_PY_PARSE_TUPLE(args, "iiz", &horizontal_subdivision, &vertical_subdivision, &canvas_name)
+	if (canvas_name != NULL) {
+		self->m_canvas_names.push_back(std::string(canvas_name));
+	}
+	else {
+		self->m_canvas_names.push_back(std::string(""));
 	}
 	try {
 		self->m_py_canvas.push_back(
 			(PythonCanvasObject *) Canvas_C_Side_init(
-				self->cpp_obj->AddCanvas(horizontal_subdivision, vertical_subdivision, canvas_name)
+				self->cpp_obj->AddCanvas(horizontal_subdivision, vertical_subdivision, self->m_canvas_names.back().c_str())
 			)
 		);
 	}
@@ -39,6 +42,7 @@ RemoveCanvas(PythonContextHandlerObject *self, PyObject * args) {
 	for(unsigned int i = 0; i < self->m_py_canvas.size(); i++) {
 		if (self->m_py_canvas[i]->cpp_obj == canvas->cpp_obj) {
 			self->m_py_canvas.erase(self->m_py_canvas.begin() + i);
+			self->m_canvas_names.erase(self->m_canvas_names.begin() + i);
 			bool ret = self->cpp_obj->RemoveCanvas( *(canvas->cpp_obj) );
 			Py_DECREF(canvas);
 			return PyBool_FromLong(ret);

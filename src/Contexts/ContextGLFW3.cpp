@@ -5,7 +5,7 @@
 #include <iostream>
 
 namespace DSight {	
-	ContextGLFW3::ContextGLFW3(int maj, int min) {
+	ContextGLFW3::ContextGLFW3(int maj, int min, int default_width, int default_height) : m_default_width(default_width), m_default_height(default_height) {
 		if (!glfwInit()) {
 			throw DSight::BaseException(DSIGHT_MSG_CONTEXT_INIT_FAILED, ExceptionCode::CONTEXT_INIT_FAILED);
 		}
@@ -17,7 +17,7 @@ namespace DSight {
 	
 	void ContextGLFW3::CreateCanvas(const char * canvas_name) {
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); 
-		m_windows.push_back(glfwCreateWindow(640, 480, canvas_name, NULL, NULL));
+		m_windows.push_back(glfwCreateWindow(m_default_width, m_default_height, canvas_name, NULL, NULL));
 		if (!m_windows.back()) {
 			glfwTerminate();
 			throw DSight::BaseException(DSIGHT_MSG_CANVAS_CREATION_FAILED, ExceptionCode::CANVAS_CREATION_FAILED);

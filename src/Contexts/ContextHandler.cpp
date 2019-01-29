@@ -10,7 +10,7 @@ namespace DSight {
 	long int ContextHandler::m_identifier = 0;
 	bool ContextHandler::canvas_instantiation_allowed = 0;
 
-	ContextHandler::ContextHandler(ContextCode context_code, int maj, int min) : m_context_code(context_code) {
+	ContextHandler::ContextHandler(ContextCode context_code, int maj, int min) : m_context_code(context_code), m_default_width(640), m_default_height(480) {
 		struct timeval tp;
 		gettimeofday(&tp, NULL);
 		m_identifier = tp.tv_sec * 1000 + tp.tv_usec / 1000;
@@ -23,7 +23,7 @@ namespace DSight {
 			switch (context_code) {
 				#ifdef _USE_GLFW3_
 				case ContextCode::GLFW3:
-					m_wrapper = new DSight::ContextGLFW3(maj, min);
+					m_wrapper = new DSight::ContextGLFW3(maj, min, m_default_width, m_default_height);
 					break;
 				#endif
 				default:
@@ -81,4 +81,13 @@ namespace DSight {
 		ContextHandler::context_count = 0;
 		ContextHandler::m_identifier = 0;
 	}
+	
+	ContextHandler& ContextHandler::SetDefaultCanvasSize(int default_width, int default_height) {
+		m_default_width = default_width;
+		m_default_height = default_height;
+		m_wrapper->m_default_width = default_width;
+		m_wrapper->m_default_height = default_height;
+		return *this;
+	}
+
 }

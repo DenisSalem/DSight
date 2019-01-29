@@ -32,12 +32,12 @@ def DestructorResetStates(context_code):
 	
 def RemoveCanvas(context_code):
 	context = dsight.ContextHandler(context_code, 3, 3)
-	canvas = context.AddCanvas(0, 0)
+	canvas = context.AddCanvas(0, 0, None)
 	return context.RemoveCanvas(canvas)
 	
 def CannotRemoveCanvasViewportTwice(context_code):
 	context = dsight.ContextHandler(context_code, 3, 3)
-	canvas = context.AddCanvas(0, 0)
+	canvas = context.AddCanvas(0, 0, None)
 	context.RemoveCanvas(canvas)
 	return not context.RemoveCanvas(canvas)
 	

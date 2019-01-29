@@ -4,7 +4,7 @@ import dsight
 
 def DirectInstantiationForbidden():
 	try:
-		canvas = dsight.Canvas(1,1)
+		canvas = dsight.Canvas(1, 1, None)
 	
 	except dsight.PythonExceptionWrapper as e:
 		message, code = e.args
@@ -17,10 +17,10 @@ def DirectInstantiationForbidden():
 	return 0;
 
 def AddOutOfBoundViewport(context_code):
-	context = dsight.ContextHandler(context_code, 3,3)
-	canvas = context.AddCanvas(2,2);
+	context = dsight.ContextHandler(context_code, 3, 3)
+	canvas = context.AddCanvas(2, 2, None);
 	try:
-		canvas.AddViewport(0,0,4,4);
+		canvas.AddViewport(0, 0, 4, 4);
 	
 	except dsight.PythonExceptionWrapper as e:
 		message, code = e.args
@@ -32,11 +32,11 @@ def AddOutOfBoundViewport(context_code):
 	return 0; 
 
 def DoNotOverlap(context_code):
-	context = dsight.ContextHandler(context_code, 3,3)
-	canvas = context.AddCanvas(4,4)
-	canvas.AddViewport(0,0,2,2)
+	context = dsight.ContextHandler(context_code, 3, 3)
+	canvas = context.AddCanvas(4, 4, None)
+	canvas.AddViewport(0, 0, 2, 2)
 	try:
-		canvas.AddViewport(2,2,5,5)
+		canvas.AddViewport(2, 2, 5, 5)
 
 	except dsight.PythonExceptionWrapper as e:
 		message, code = e.args
@@ -49,11 +49,11 @@ def DoNotOverlap(context_code):
 
 
 def PreventViewportOverlap(context_code):
-	context = dsight.ContextHandler(context_code, 3,3)
-	canvas = context.AddCanvas(4,4)
-	canvas.AddViewport(0,0,2,2)
+	context = dsight.ContextHandler(context_code, 3, 3)
+	canvas = context.AddCanvas(4, 4, None)
+	canvas.AddViewport(0, 0, 2, 2)
 	try:
-		canvas.AddViewport(1,1,3,3)
+		canvas.AddViewport(1, 1, 3, 3)
 
 	except dsight.PythonExceptionWrapper as e:
 		message, code = e.args
@@ -66,7 +66,7 @@ def PreventViewportOverlap(context_code):
 
 def PreventViewportOverlapWithMultipleViewports(context_code):
 	context = dsight.ContextHandler(context_code, 3,3)
-	canvas = context.AddCanvas(1,1)
+	canvas = context.AddCanvas(1, 1, None)
 	canvas.AddViewport(0,0,1,1)
 	canvas.AddViewport(1,0,2,1)
 	canvas.AddViewport(0,1,1,2)
@@ -84,11 +84,11 @@ def PreventViewportOverlapWithMultipleViewports(context_code):
 	return 0
 
 def PreventViewportOverlapFromZeroZeroToOneOne(context_code):
-	context = dsight.ContextHandler(context_code, 3,3)
-	canvas = context.AddCanvas(2,2)
-	canvas.AddViewport(0,0,1,1)
+	context = dsight.ContextHandler(context_code, 3, 3)
+	canvas = context.AddCanvas(2, 2, None)
+	canvas.AddViewport(0, 0, 1, 1)
 	try:
-		canvas.AddViewport(0,0,1,1)
+		canvas.AddViewport(0, 0, 1, 1)
 
 	except dsight.PythonExceptionWrapper as e:
 		message, code = e.args
@@ -102,7 +102,7 @@ def PreventViewportOverlapFromZeroZeroToOneOne(context_code):
 
 def ZeroSubdivision(context_code):
 	context = dsight.ContextHandler(context_code, 3,3)
-	canvas = context.AddCanvas(0,0)
+	canvas = context.AddCanvas(0, 0, None)
 	try:
 		canvas.AddViewport(0,0,1,1)
 		
@@ -117,13 +117,13 @@ def ZeroSubdivision(context_code):
 
 def RemoveViewport(context_code):
 	context = dsight.ContextHandler(context_code, 3, 3)
-	canvas = context.AddCanvas(0, 0)
+	canvas = context.AddCanvas(0, 0, None)
 	viewport = canvas.AddViewport(0, 0, 1, 1)
 	return canvas.RemoveViewport(viewport)
 	
 def CannotRemoveViewportTwice(context_code):
 	context = dsight.ContextHandler(context_code, 3, 3)
-	canvas = context.AddCanvas(0, 0)
+	canvas = context.AddCanvas(0, 0, None)
 	viewport = canvas.AddViewport(0, 0, 1, 1)
 	canvas.RemoveViewport(viewport)
 	return not canvas.RemoveViewport(viewport)
