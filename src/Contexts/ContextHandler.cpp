@@ -41,9 +41,9 @@ namespace DSight {
 		return canvas_instantiation_allowed;
 	}
 	
-	Canvas& ContextHandler::AddCanvas(unsigned int horizontal_subdivision, unsigned int vertical_subdivision) {
+	Canvas& ContextHandler::AddCanvas(unsigned int horizontal_subdivision, unsigned int vertical_subdivision, const char * canvas_name) {
 		canvas_instantiation_allowed = 1;
-		m_wrapper->CreateCanvas();
+		m_wrapper->CreateCanvas(canvas_name);
 		m_canvas.push_back(
 			new Canvas(horizontal_subdivision, vertical_subdivision)
 		);
@@ -57,6 +57,7 @@ namespace DSight {
 			if ( *(m_canvas[i]) == canvas) {
 				delete m_canvas[i];
 				m_canvas.erase(m_canvas.begin() + i);
+				m_wrapper->DeleteCanvas(i);
 				return 1;
 			}
 		}

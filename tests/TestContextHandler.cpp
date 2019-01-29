@@ -34,8 +34,8 @@ bool SingleContextHandlerInstance(DSight::ContextCode context_code) {
 	return 0;
 }
 bool RemoveCanvas(DSight::ContextCode context_code) {
-	DSight::ContextHandler context(context_code, 3,3);
-	DSight::Canvas& canvas = context.AddCanvas(0,0);
+	DSight::ContextHandler context(context_code, 3, 3);
+	DSight::Canvas& canvas = context.AddCanvas(0, 0, NULL);
 	return context.RemoveCanvas(canvas);
 }
 

@@ -3,7 +3,7 @@
 namespace DSight {
 	class ContextBase {
 		public:
-			virtual void CreateCanvas() = 0;
+			virtual void CreateCanvas(const char * canvas_name) = 0;
 			virtual void DeleteCanvas(unsigned int index) = 0;
 	};
 }

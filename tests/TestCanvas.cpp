@@ -6,7 +6,7 @@
 
 bool DirectInstantiationForbidden() {
 	try{
-		DSight::Canvas canvas(1,1);
+		DSight::Canvas canvas(1, 1);
 	}
 	catch(DSight::BaseException &e) {
 		if (e.code == DSight::ExceptionCode::INSTANTIATION_ERROR) {
@@ -18,10 +18,10 @@ bool DirectInstantiationForbidden() {
 }
 
 bool AddOutOfBoundViewport(DSight::ContextCode context_code) {
-	DSight::ContextHandler context(context_code, 3,3);
-	DSight::Canvas& canvas = context.AddCanvas(2,2);
+	DSight::ContextHandler context(context_code, 3, 3);
+	DSight::Canvas& canvas = context.AddCanvas(2, 2, NULL);
 	try {
-		canvas.AddViewport(0,0,4,4);
+		canvas.AddViewport(0, 0, 4, 4);
 	}
 	catch (DSight::BaseException &e) {
 		if (e.code == DSight::ExceptionCode::INVALID_COORDINATES_OUT_OF_BOUNDS) {
@@ -33,11 +33,11 @@ bool AddOutOfBoundViewport(DSight::ContextCode context_code) {
 }
 
 bool DoNotOverlap(DSight::ContextCode context_code) {
-	DSight::ContextHandler context(context_code, 3,3);
-	DSight::Canvas& canvas = context.AddCanvas(4,4);
-	canvas.AddViewport(0,0,2,2);
+	DSight::ContextHandler context(context_code, 3, 3);
+	DSight::Canvas& canvas = context.AddCanvas(4, 4, NULL);
+	canvas.AddViewport(0, 0, 2, 2);
 	try {
-		canvas.AddViewport(2,2,5,5);
+		canvas.AddViewport(2, 2, 5, 5);
 
 	} catch(DSight::BaseException &e) {
 		if (e.code == DSight::ExceptionCode::INVALID_COORDINATES_OVERLAP) {
@@ -49,11 +49,11 @@ bool DoNotOverlap(DSight::ContextCode context_code) {
 }
 
 bool PreventViewportOverlap(DSight::ContextCode context_code) {
-	DSight::ContextHandler context(context_code, 3,3);
-	DSight::Canvas& canvas = context.AddCanvas(4,4);
-	canvas.AddViewport(0,0,2,2);
+	DSight::ContextHandler context(context_code, 3, 3);
+	DSight::Canvas& canvas = context.AddCanvas(4, 4, NULL);
+	canvas.AddViewport(0, 0, 2, 2);
 	try {
-		canvas.AddViewport(1,1,3,3);
+		canvas.AddViewport(1, 1, 3, 3);
 
 	} catch(DSight::BaseException &e) {
 		if (e.code == DSight::ExceptionCode::INVALID_COORDINATES_OVERLAP) {
@@ -65,8 +65,8 @@ bool PreventViewportOverlap(DSight::ContextCode context_code) {
 }
 
 bool PreventViewportOverlapWithMultipleViewports(DSight::ContextCode context_code) {
-	DSight::ContextHandler context(context_code, 3,3);
-	DSight::Canvas& canvas = context.AddCanvas(1,1);
+	DSight::ContextHandler context(context_code, 3, 3);
+	DSight::Canvas& canvas = context.AddCanvas(1 ,1, NULL);
 	canvas.AddViewport(0,0,1,1);
 	canvas.AddViewport(1,0,2,1);
 	canvas.AddViewport(0,1,1,2);
@@ -85,7 +85,7 @@ bool PreventViewportOverlapWithMultipleViewports(DSight::ContextCode context_cod
 
 bool PreventViewportOverlapFromZeroZeroToOneOne(DSight::ContextCode context_code) {
 	DSight::ContextHandler context(context_code, 3,3);
-	DSight::Canvas& canvas = context.AddCanvas(2,2);
+	DSight::Canvas& canvas = context.AddCanvas(2, 2, NULL);
 	canvas.AddViewport(0,0,1,1);
 	try {
 		canvas.AddViewport(0,0,1,1);
@@ -101,7 +101,7 @@ bool PreventViewportOverlapFromZeroZeroToOneOne(DSight::ContextCode context_code
 
 bool ZeroSubdivision(DSight::ContextCode context_code)  {
 	DSight::ContextHandler context(context_code, 3,3);
-	DSight::Canvas& canvas = context.AddCanvas(0,0);
+	DSight::Canvas& canvas = context.AddCanvas(0,0, NULL);
 	try {
 		canvas.AddViewport(0,0,1,1);
 	} catch(DSight::BaseException &e) {
@@ -115,7 +115,7 @@ bool ZeroSubdivision(DSight::ContextCode context_code)  {
 
 bool RemoveViewport(DSight::ContextCode context_code) {
 	DSight::ContextHandler context(context_code, 3,3);
-	DSight::Canvas& canvas = context.AddCanvas(0,0);
+	DSight::Canvas& canvas = context.AddCanvas(0,0, NULL);
 	DSight::Viewport& viewport =  canvas.AddViewport(0,0,1,1);
 	return canvas.RemoveViewport(viewport);
 }

@@ -10,14 +10,15 @@ PyObject *
 AddCanvas(PythonContextHandlerObject *self, PyObject * args) {
 	int horizontal_subdivision;
 	int vertical_subdivision;
-	if (!PyArg_ParseTuple(args, "ii", &horizontal_subdivision, &vertical_subdivision)) {
+	const char * canvas_name;
+	if (!PyArg_ParseTuple(args, "iis", &horizontal_subdivision, &vertical_subdivision, &canvas_name)) {
 		PyErr_BadArgument();
 		return NULL;
 	}
 	try {
 		self->m_py_canvas.push_back(
 			(PythonCanvasObject *) Canvas_C_Side_init(
-				self->cpp_obj->AddCanvas(horizontal_subdivision, vertical_subdivision)
+				self->cpp_obj->AddCanvas(horizontal_subdivision, vertical_subdivision, canvas_name)
 			)
 		);
 	}
@@ -92,8 +93,8 @@ ContextHandler_init(PyTypeObject *type, PyObject *args, PyObject * kw)
 }
 
 static PyMethodDef ContextHandler_methods[] = {
-    {"AddCanvas", (PyCFunction) AddCanvas, METH_VARARGS,"Add Canvas."},
-    {"RemoveCanvas", (PyCFunction) RemoveCanvas, METH_VARARGS,"Remove Canvas."},
+    {"AddCanvas", (PyCFunction) AddCanvas, METH_VARARGS, "Add Canvas."},
+    {"RemoveCanvas", (PyCFunction) RemoveCanvas, METH_VARARGS, "Remove Canvas."},
     {0, 0, 0, 0}  /* Sentinel */
 };
 

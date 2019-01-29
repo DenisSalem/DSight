@@ -7,7 +7,7 @@ namespace DSight {
 			ContextGLFW3(int maj, int min);
 			~ContextGLFW3();
 			void LoopRender();
-			void CreateCanvas();
+			void CreateCanvas(const char * canvas_name);
 			void DeleteCanvas(unsigned int index);
 		
 		private:
