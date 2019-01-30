@@ -2,6 +2,7 @@
 #include "Contexts/ContextCodes.hpp"
 #include "Exceptions/ExceptionCodes.hpp"
 
+#include "PythonHistogram.hpp"
 #include "PythonViewport.hpp"
 #include "PythonCanvas.hpp"
 #include "PythonContextHandler.hpp"
@@ -38,6 +39,9 @@ PyInit_dsight(void)
 
     if (PyType_Ready(&PythonViewport) < 0)
         return NULL;
+        
+    if (PyType_Ready(&PythonHistogram) < 0)
+        return NULL;
                                
     m = PyModule_Create(&dsight);
     if (m == NULL) {
@@ -55,6 +59,7 @@ PyInit_dsight(void)
 	DSIGHT_ADD_OBJECT_TO_MODULE(ContextHandler)
 	DSIGHT_ADD_OBJECT_TO_MODULE(Canvas)
 	DSIGHT_ADD_OBJECT_TO_MODULE(Viewport)
+	DSIGHT_ADD_OBJECT_TO_MODULE(Histogram)
 
     
 	// DEFINES CONSTANTS

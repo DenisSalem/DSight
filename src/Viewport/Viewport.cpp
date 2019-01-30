@@ -8,15 +8,18 @@ namespace DSight {
 		DSIGHT_SET_UNIQUE_IDENTIFIER(m_identifier);
 	}
 	
-	Histogram * Viewport::SetHistogram() {
-		//~ switch (m_context_code) {
-			//~ case ContextCode::GLFW3:
-				//~ return new DSight::HistogramGL();
-				//~ break;
-			//~ default:
-				//~ return new DSight::HistogramCPU();
-		//~ }
-		return NULL;
+	Viewport::~Viewport() {
+		switch (m_chart_type) {
+			case ChartType::HISTOGRAM:
+				delete (Histogram*) m_chart;
+				break;
+		}
+	}
+	
+	Histogram& Viewport::SetHistogram() {
+		m_chart = new DSight::Histogram();
+		m_chart_type = ChartType::HISTOGRAM;
+		return (Histogram&) *m_chart;
 	}
 	
 	bool operator== (const Viewport &v1, const Viewport &v2) {

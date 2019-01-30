@@ -5,7 +5,8 @@
 #include "Viewport/Viewport.hpp"
 #include "Exceptions/ExceptionMessages.hpp"
 #include "Exceptions/ExceptionCodes.hpp"
-#
+#include "PythonHistogram.hpp"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -14,6 +15,7 @@ typedef struct {
     PyObject_HEAD
     PyObject *weakreflist;
     DSight::Viewport * cpp_obj;
+    PythonHistogramObject * m_py_histogram;
 } PythonViewportObject;
 
 extern PyTypeObject PythonViewport;

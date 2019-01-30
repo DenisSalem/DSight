@@ -1,6 +1,60 @@
 #ifndef DSIGHT_PY_MACROS_HPP_INCLUDED
 #define DSIGHT_PY_MACROS_HPP_INCLUDED
 
+#define DSIGHT_DEFINE_NEW_PY_TYPE(CLASS_NAME, DOC) \
+PyTypeObject Python ## CLASS_NAME = { \
+    PyVarObject_HEAD_INIT(NULL, 0) \
+    "dsight." # CLASS_NAME, \
+    \
+	sizeof(Python ## CLASS_NAME ## Object), \
+	0, \
+    (destructor) CLASS_NAME ## _dealloc, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0, \
+    Py_TPFLAGS_DEFAULT, \
+    DOC, \
+    0, \
+    0, \
+    0, \
+    offsetof(Python ## CLASS_NAME ## Object, weakreflist), \
+    0, \
+    0, \
+    CLASS_NAME ## _methods, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0, \
+    CLASS_NAME ## _init, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0, \
+    0 \
+};
+
+
 #define DSIGHT_CATCH_BASE_EXCEPTION() \
 catch (DSight::BaseException& e) { \
 	PyObject* py_e = Py_BuildValue("(s,i)", e.message.c_str(), e.code); \

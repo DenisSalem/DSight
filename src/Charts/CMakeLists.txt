@@ -29,6 +29,7 @@ if(DEFINED USE_GLFW3)
 find_package(OpenGL REQUIRED)
 target_include_directories(Charts PRIVATE ${OPENGL_INCLUDE_DIR})
 target_link_libraries(Charts ${OPENGL_gl_LIBRARY})
+target_link_libraries(Charts Context)
 endif()
 
 

@@ -2,7 +2,7 @@
 
 from setuptools import setup, Extension
 import os
-
+import sys
 defines = []
 gl_libs = []
 gl_includes = []
@@ -22,14 +22,13 @@ cpp_sources += [ src_dir+"../src/Canvas/" +f for f in os.listdir(src_dir+"../src
 cpp_sources += [ src_dir+"../src/Contexts/" +f for f in os.listdir(src_dir+"../src/Contexts/") if f[-4:] ==".cpp"]
 
 example_module = Extension(
-    'dsight',
-    define_macros = defines,
-    sources=cpp_sources,
-    libraries=['stdc++']+gl_libs,
-    include_dirs = [src_dir+"../src", "${CMAKE_BINARY_DIR}/Python", src_dir]+gl_includes,
-    language='C++',
-    extra_compile_args=['-Wall','-Wextra','-O3'] )
-
+		'dsight',
+		define_macros = defines,
+		sources=cpp_sources,
+		libraries=['stdc++']+gl_libs,
+		include_dirs = [src_dir+"../src", "${CMAKE_BINARY_DIR}/Python", src_dir]+gl_includes,
+		language='C++',
+		extra_compile_args=['-Wall','-Wextra','-O3'] )
 setup(
     name='DSight',
     zip_safe=False,

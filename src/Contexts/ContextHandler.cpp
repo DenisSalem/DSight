@@ -9,6 +9,8 @@ namespace DSight {
 	int ContextHandler::context_count = 0;
 	long int ContextHandler::static_identifier = 0;
 	bool ContextHandler::canvas_instantiation_allowed = 0;
+	bool ContextHandler::gl_enabled = false;
+	ContextHandler * ContextHandler::context_handler = NULL;
 
 	ContextHandler::ContextHandler(ContextCode context_code, int maj, int min) : m_context_code(context_code), m_default_width(640), m_default_height(480) {
 		struct timeval tp;
@@ -23,7 +25,8 @@ namespace DSight {
 			switch (context_code) {
 				#ifdef _USE_GLFW3_
 				case ContextCode::GLFW3:
-					m_wrapper = new DSight::ContextGLFW3(maj, min, m_default_width, m_default_height);
+					m_backend = new DSight::ContextGLFW3(maj, min, m_default_width, m_default_height);
+					gl_enabled = true;
 					break;
 				#endif
 				default:
@@ -31,6 +34,7 @@ namespace DSight {
 					throw DSight::BaseException(DSIGHT_MSG_UNSUPPORTED_CONTEXT, ExceptionCode::UNSUPPORTED_CONTEXT);
 			}
 		}
+		ContextHandler::context_handler = this;
 	}
 	
 	long int ContextHandler::GetCurrentContextIdentifier() {
@@ -41,9 +45,17 @@ namespace DSight {
 		return canvas_instantiation_allowed;
 	}
 	
+	bool ContextHandler::IsContextUsesGL() {
+		return gl_enabled;
+	}
+	
+	void ContextHandler::Draw() {
+		printf("Static ContextHandler Draw()\n");
+	}
+		
 	Canvas& ContextHandler::AddCanvas(unsigned int horizontal_subdivision, unsigned int vertical_subdivision, const char * canvas_name) {
 		canvas_instantiation_allowed = 1;
-		m_wrapper->CreateCanvas(canvas_name);
+		m_backend->CreateCanvas(canvas_name);
 		m_canvas.push_back(
 			new Canvas(horizontal_subdivision, vertical_subdivision)
 		);
@@ -57,7 +69,7 @@ namespace DSight {
 			if ( *(m_canvas[i]) == canvas) {
 				delete m_canvas[i];
 				m_canvas.erase(m_canvas.begin() + i);
-				m_wrapper->DeleteCanvas(i);
+				m_backend->DeleteCanvas(i);
 				return 1;
 			}
 		}
@@ -71,7 +83,7 @@ namespace DSight {
 		
 		switch (m_context_code) {
 			case ContextCode::GLFW3:
-				delete (ContextGLFW3 *) m_wrapper;
+				delete (ContextGLFW3 *) m_backend;
 				break;
 				
 			default:
@@ -80,13 +92,14 @@ namespace DSight {
 		
 		ContextHandler::context_count = 0;
 		ContextHandler::static_identifier = 0;
+		ContextHandler::context_handler = NULL;
 	}
 	
 	ContextHandler& ContextHandler::SetDefaultCanvasSize(int default_width, int default_height) {
 		m_default_width = default_width;
 		m_default_height = default_height;
-		m_wrapper->m_default_width = default_width;
-		m_wrapper->m_default_height = default_height;
+		m_backend->m_default_width = default_width;
+		m_backend->m_default_height = default_height;
 		return *this;
 	}
 

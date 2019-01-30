@@ -67,5 +67,3 @@ if "CONTEXT_CODE_GLFW3" in dir(dsight):
 	assert(ChainWhithSetDefaultCanvasSize(dsight.CONTEXT_CODE_GLFW3))
 	assert(CheckRefCountChainWhithSetDefaultCanvasSize(dsight.CONTEXT_CODE_GLFW3))
 	assert(CheckRefCountSetDefaultCanvasSize(dsight.CONTEXT_CODE_GLFW3))
-
-

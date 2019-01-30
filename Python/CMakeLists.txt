@@ -17,11 +17,8 @@ if (PYTHON)
     
     add_custom_command(
 		OUTPUT ${OUTPUT}
-        COMMAND ${PYTHON} ${SETUP_PY} build
         COMMAND ${CMAKE_COMMAND} -E touch ${OUTPUT}
     )
-
-    add_custom_target(PythonDSight ALL DEPENDS ${OUTPUT})
 
     install(CODE "execute_process(COMMAND ${PYTHON} ${SETUP_PY} install --user)")
 endif()

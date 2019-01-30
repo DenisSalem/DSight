@@ -3,6 +3,6 @@
 
 namespace DSight {
 	void HistogramCPU::Draw() {
-		std::cout << "Histogram CPU\n";
+		std::cout << "Draw CPU backend not implemented yet.\n";
 	}
 }

@@ -1,6 +1,10 @@
 #include <vector>
 
 namespace DSight {
+	enum ChartType {
+		HISTOGRAM
+	};
+	
 	class Chart {
 		public:
 			void SetRefreshDataCallback(void (*refresh_data_callback)(Chart *, void *));
