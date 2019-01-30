@@ -19,13 +19,14 @@ namespace DSight {
 			bool static IsCanvasInstantiationAllowed();
 			long int static GetCurrentContextIdentifier();
 			ContextHandler& SetDefaultCanvasSize(int default_width, int default_height);
-			
+			friend bool operator== (const ContextHandler &c1, const ContextHandler &c2);
 		private:
 			ContextCode m_context_code;
 			ContextBase * m_wrapper;
 			std::vector<Canvas * > m_canvas;
 			static int context_count;
-			static long int m_identifier;
+			static long int static_identifier;
+			long int m_identifier;
 			int m_default_width;
 			int m_default_height;
 			static bool canvas_instantiation_allowed;

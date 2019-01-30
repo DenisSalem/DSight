@@ -33,6 +33,12 @@ bool SingleContextHandlerInstance(DSight::ContextCode context_code) {
 	}
 	return 0;
 }
+
+bool SetDefaultCanvasSizeMustReturnItself(DSight::ContextCode context_code) {
+	DSight::ContextHandler context(context_code, 3, 3);
+	return context == context.SetDefaultCanvasSize(320,240);
+}
+
 bool RemoveCanvas(DSight::ContextCode context_code) {
 	DSight::ContextHandler context(context_code, 3, 3);
 	DSight::Canvas& canvas = context.AddCanvas(0, 0, NULL);
@@ -44,6 +50,7 @@ int main() {
 	assert(SingleContextHandlerInstance(DSight::ContextCode::GLFW3));
 	assert(DestructorResetStates(DSight::ContextCode::GLFW3));
 	assert(RemoveCanvas(DSight::ContextCode::GLFW3));
+	assert(SetDefaultCanvasSizeMustReturnItself(DSight::ContextCode::GLFW3));
 	#endif
 	return 0;
 }

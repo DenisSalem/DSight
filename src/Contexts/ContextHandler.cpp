@@ -7,14 +7,14 @@
 
 namespace DSight {
 	int ContextHandler::context_count = 0;
-	long int ContextHandler::m_identifier = 0;
+	long int ContextHandler::static_identifier = 0;
 	bool ContextHandler::canvas_instantiation_allowed = 0;
 
 	ContextHandler::ContextHandler(ContextCode context_code, int maj, int min) : m_context_code(context_code), m_default_width(640), m_default_height(480) {
 		struct timeval tp;
 		gettimeofday(&tp, NULL);
 		m_identifier = tp.tv_sec * 1000 + tp.tv_usec / 1000;
-		
+		static_identifier = m_identifier;
 		if (ContextHandler::context_count > 0) {
 			throw DSight::BaseException(DSIGHT_MSG_MULTIPLE_CONTEXT, ExceptionCode::MULTIPLE_CONTEXT);
 		}
@@ -34,7 +34,7 @@ namespace DSight {
 	}
 	
 	long int ContextHandler::GetCurrentContextIdentifier() {
-		return m_identifier;
+		return static_identifier;
 	}
 	
 	bool ContextHandler::IsCanvasInstantiationAllowed() {
@@ -79,7 +79,7 @@ namespace DSight {
 		}
 		
 		ContextHandler::context_count = 0;
-		ContextHandler::m_identifier = 0;
+		ContextHandler::static_identifier = 0;
 	}
 	
 	ContextHandler& ContextHandler::SetDefaultCanvasSize(int default_width, int default_height) {
@@ -90,4 +90,7 @@ namespace DSight {
 		return *this;
 	}
 
+	bool operator== (const ContextHandler &c1, const ContextHandler &c2) {
+		return c1.m_identifier == c2.m_identifier;
+	}
 }

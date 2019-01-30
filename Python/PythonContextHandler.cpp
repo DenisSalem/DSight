@@ -11,13 +11,16 @@ AddCanvas(PythonContextHandlerObject *self, PyObject * args) {
 	int horizontal_subdivision;
 	int vertical_subdivision;
 	const char * canvas_name = NULL;
+	
 	DSIGHT_PY_PARSE_TUPLE(args, "iiz", &horizontal_subdivision, &vertical_subdivision, &canvas_name)
+	
 	if (canvas_name != NULL) {
 		self->m_canvas_names.push_back(std::string(canvas_name));
 	}
 	else {
 		self->m_canvas_names.push_back(std::string(""));
 	}
+	
 	try {
 		self->m_py_canvas.push_back(
 			(PythonCanvasObject *) Canvas_C_Side_init(
@@ -49,6 +52,18 @@ RemoveCanvas(PythonContextHandlerObject *self, PyObject * args) {
 		}
 	}
 	return PyBool_FromLong(0);
+}
+
+PyObject * 
+SetDefaultCanvasSize(PythonContextHandlerObject *self, PyObject * args) {
+	Py_XINCREF( (PyObject *) self);
+	int default_width;
+	int default_height;
+	
+	DSIGHT_PY_PARSE_TUPLE(args, "ii", &default_width, &default_height)
+
+	self->cpp_obj->SetDefaultCanvasSize(default_width, default_height);
+	return (PyObject *) self;
 }
 
 static void
@@ -99,6 +114,7 @@ ContextHandler_init(PyTypeObject *type, PyObject *args, PyObject * kw)
 static PyMethodDef ContextHandler_methods[] = {
     {"AddCanvas", (PyCFunction) AddCanvas, METH_VARARGS, "Add Canvas."},
     {"RemoveCanvas", (PyCFunction) RemoveCanvas, METH_VARARGS, "Remove Canvas."},
+    {"SetDefaultCanvasSize", (PyCFunction) SetDefaultCanvasSize, METH_VARARGS, "Set default canvas size."},
     {0, 0, 0, 0}  /* Sentinel */
 };
 
