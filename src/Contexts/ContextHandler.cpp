@@ -51,6 +51,20 @@ namespace DSight {
 	
 	void ContextHandler::Draw() {
 		printf("Static ContextHandler Draw()\n");
+		for (unsigned int i = 0; i < context_handler->m_canvas_threads.size(); i++) {
+			std::cout << (long int) context_handler->m_canvas_threads[i] << "\n";
+			switch (context_handler->m_context_code) {
+				case (DSight::ContextCode::GLFW3):
+					context_handler->m_canvas_threads[i] = new std::thread(
+						&DSight::ContextGLFW3::LoopRender,
+						(DSight::ContextGLFW3 *) context_handler->m_backend,
+						context_handler->m_backend->GetCanvas(i),
+						context_handler->m_canvas[i]
+					);
+					break;
+			}	
+			std::cout << (long int) context_handler->m_canvas_threads[i] << "\n";
+		}
 	}
 		
 	Canvas& ContextHandler::AddCanvas(unsigned int horizontal_subdivision, unsigned int vertical_subdivision, const char * canvas_name) {
@@ -59,6 +73,7 @@ namespace DSight {
 		m_canvas.push_back(
 			new Canvas(horizontal_subdivision, vertical_subdivision)
 		);
+		m_canvas_threads.push_back(NULL);
 		canvas_instantiation_allowed = 0;
 		return *(m_canvas.back());
 		
@@ -69,6 +84,7 @@ namespace DSight {
 			if ( *(m_canvas[i]) == canvas) {
 				delete m_canvas[i];
 				m_canvas.erase(m_canvas.begin() + i);
+				m_canvas_threads.erase(m_canvas_threads.begin() + i);
 				m_backend->DeleteCanvas(i);
 				return 1;
 			}

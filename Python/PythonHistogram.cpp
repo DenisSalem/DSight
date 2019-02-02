@@ -11,7 +11,7 @@ PyObject *
 HistogramDraw(PythonHistogramObject *self) {
 	(void) self;
 	DSight::ContextHandler::Draw();
-	Py_RETURN_NONE;
+	return (PyObject *) self;
 }
 
 static void

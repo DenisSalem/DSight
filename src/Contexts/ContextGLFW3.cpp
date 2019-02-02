@@ -29,13 +29,13 @@ namespace DSight {
 		}	
 	}
 
-	void ContextGLFW3::LoopRender() {
-		auto window = m_windows.back();
+	void ContextGLFW3::LoopRender(void * backend_canvas, Canvas * canvas) {
+		GLFWwindow* window = (GLFWwindow*) backend_canvas;
 		glfwMakeContextCurrent(window);
 		glfwShowWindow(window);
 		while (!glfwWindowShouldClose(window))
 		{
-			// Callback designer.
+			canvas->Draw();
 			glClear(GL_COLOR_BUFFER_BIT);
 			glfwSwapBuffers(window);
 			glfwPollEvents();
@@ -49,6 +49,14 @@ namespace DSight {
 			glfwDestroyWindow(m_windows[index]);
 			m_windows.erase(m_windows.begin() + index);
 			return;
+		}
+		throw DSight::BaseException(DSIGHT_MSG_CANVAS_DOESNT_EXISTS, ExceptionCode::CANVAS_DOESNT_EXISTS);
+	}
+	
+	void * ContextGLFW3::GetCanvas(unsigned int index) {
+		size_t size = m_windows.size();
+		if (index < size) {
+			return (void*) m_windows[index];
 		}
 		throw DSight::BaseException(DSIGHT_MSG_CANVAS_DOESNT_EXISTS, ExceptionCode::CANVAS_DOESNT_EXISTS);
 	}

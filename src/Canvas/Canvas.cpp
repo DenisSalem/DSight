@@ -88,6 +88,10 @@ namespace DSight {
 		return 0;
 	}
 	
+	void Canvas::Draw() {
+		printf("Draw canvas\n");
+	}
+	
 	bool operator== (const Canvas &c1, const Canvas &c2) {
 		return c1.m_identifier == c2.m_identifier;
 	}

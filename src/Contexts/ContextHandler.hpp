@@ -1,6 +1,6 @@
 #ifndef DSIGHT_CONTEXT_HANDLER_HPP_INCLUDED
 #define DSIGHT_CONTEXT_HANDLER_HPP_INCLUDED
-
+#include <thread>
 #include "../Canvas/Canvas.hpp"
 #include "ContextCodes.hpp"
 
@@ -28,10 +28,12 @@ namespace DSight {
 			ContextCode m_context_code;
 			ContextBase * m_backend;
 			std::vector<Canvas * > m_canvas;
+			std::vector<std::thread * > m_canvas_threads;
 			long int m_identifier;
 			int m_default_width;
 			int m_default_height;
-			
+			std::thread * m_main_thread;
+
 			static bool canvas_instantiation_allowed;
 			static int context_count;
 			static bool gl_enabled;

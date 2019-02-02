@@ -9,6 +9,7 @@ DONE | Add a macro for PyTypeObject Initialization.
 WIP  | Python binding.                                                                                      
 WIP  | Add Histogram.
 WIP  | Write unit tests for both C/C++ and Python code.
+TODO | S'assurer que le thread supprimé est bien arrêté. Sinon forcer son arrêt.
 TODO | Add DefaultLayout method.
 TODO | Add a chart updater method for animation. 
 TODO | Add DSight::AllocationException, Inherits from DSight::BaseException.
